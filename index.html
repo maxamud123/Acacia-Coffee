@@ -1,0 +1,1688 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cafe Acacia - Premium Dining</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;500;700&family=Forum&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['"DM Sans"', 'sans-serif'],
+              serif: ['"Forum"', 'serif'],
+            },
+            colors: {
+              gold: {
+                400: '#e4c590',
+                500: '#d1a054', // Main gold
+                600: '#b38236',
+              },
+              dark: {
+                900: '#0e1013', // Deep background
+                800: '#16191d', // Secondary background
+                700: '#1f2329', // Card background
+              }
+            },
+            backgroundImage: {
+              'hero-pattern': "linear-gradient(to bottom, rgba(0,0,0,0.7), rgba(0,0,0,0.7))",
+              'texture': "url('https://www.transparenttextures.com/patterns/cubes.png')",
+            },
+            animation: {
+              'spin-slow': 'spin 10s linear infinite',
+              'zoom-in': 'zoom 20s infinite alternate',
+              'slide-up': 'slideUp 0.8s ease-out forwards',
+              'slide-down': 'slideDown 0.5s ease-out forwards',
+              'shimmer': 'shimmer 2s infinite linear',
+              'fade-in': 'fadeIn 1s ease-out forwards',
+            },
+            keyframes: {
+              zoom: {
+                '0%': { transform: 'scale(1)' },
+                '100%': { transform: 'scale(1.1)' },
+              },
+              slideUp: {
+                '0%': { opacity: 0, transform: 'translateY(20px)' },
+                '100%': { opacity: 1, transform: 'translateY(0)' },
+              },
+              slideDown: {
+                '0%': { transform: 'translateY(-100%)' },
+                '100%': { transform: 'translateY(0)' },
+              },
+              fadeIn: {
+                '0%': { opacity: 0 },
+                '100%': { opacity: 1 },
+              },
+              shimmer: {
+                '0%': { transform: 'translateX(-100%)' },
+                '100%': { transform: 'translateX(200%)' }
+              }
+            }
+          }
+        }
+      }
+    </script>
+    <style>
+      html {
+        scroll-padding-top: 100px;
+      }
+      /* Custom scrollbar for webkit */
+      ::-webkit-scrollbar {
+        width: 5px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #0e1013;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #d1a054;
+        border-radius: 4px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #e4c590;
+      }
+      
+      .font-serif {
+        letter-spacing: 0.05em;
+      }
+      
+      /* Smooth separator line */
+      .separator {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        margin-bottom: 1.5rem;
+      }
+      .separator::before,
+      .separator::after {
+        content: "";
+        display: block;
+        width: 30px;
+        height: 1px;
+        background-color: #d1a054;
+      }
+      .separator-icon {
+        width: 5px;
+        height: 5px;
+        background-color: #d1a054;
+        transform: rotate(45deg);
+      }
+
+      /* Text reveal effect */
+      .reveal-text {
+        position: relative;
+        overflow: hidden;
+      }
+      
+      /* Menu Leader Dots */
+      .menu-leader {
+        flex-grow: 1;
+        border-bottom: 1px dotted rgba(209, 160, 84, 0.4);
+        margin: 0 15px;
+        position: relative;
+        top: -5px;
+      }
+
+      /* Toast Notifications */
+      .toast-container {
+        position: fixed;
+        bottom: 28px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 99999;
+        display: flex;
+        flex-direction: column-reverse;
+        gap: 10px;
+        align-items: center;
+        pointer-events: none;
+      }
+      .toast {
+        pointer-events: all;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 14px 22px;
+        font-size: 14px;
+        font-weight: 500;
+        min-width: 300px;
+        max-width: 500px;
+        box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+        animation: toastIn 0.35s cubic-bezier(0.21,1.02,0.73,1) forwards;
+      }
+      .toast-success { background: #0a1f0a; border-left: 4px solid #4ade80; color: #86efac; }
+      .toast-error   { background: #1f0a0a; border-left: 4px solid #f87171; color: #fca5a5; }
+      .toast-info    { background: #1a1409; border-left: 4px solid #d1a054; color: #e4c590; }
+      @keyframes toastIn {
+        from { opacity: 0; transform: translateY(14px) scale(0.95); }
+        to   { opacity: 1; transform: translateY(0) scale(1); }
+      }
+
+      /* Category Filter Tabs */
+      .cat-tab {
+        padding: 8px 22px;
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        border: 1px solid rgba(209,160,84,0.25);
+        color: #6b7280;
+        background: transparent;
+        cursor: pointer;
+        transition: all 0.2s;
+      }
+      .cat-tab:hover  { color: #d1a054; border-color: rgba(209,160,84,0.6); }
+      .cat-tab.active { background: #d1a054; color: #0e1013; border-color: #d1a054; }
+
+      /* API Status Badge */
+      .api-badge {
+        display: inline-flex; align-items: center; gap: 6px;
+        font-size: 10px; font-weight: 700; letter-spacing: 0.1em;
+        padding: 3px 10px; border-radius: 20px; text-transform: uppercase;
+      }
+      .api-online  { background: rgba(74,222,128,0.1); color: #4ade80; border: 1px solid rgba(74,222,128,0.2); }
+      .api-offline { background: rgba(248,113,113,0.1); color: #f87171; border: 1px solid rgba(248,113,113,0.2); }
+      .api-dot { width: 6px; height: 6px; border-radius: 50%; }
+      .api-dot-online  { background: #4ade80; animation: blink 2s infinite; }
+      .api-dot-offline { background: #f87171; }
+      @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+      /* Scroll Reveal */
+      .reveal { opacity: 0; transform: translateY(32px); transition: opacity 0.7s ease, transform 0.7s ease; }
+      .reveal.visible { opacity: 1; transform: translateY(0); }
+      .reveal-left { opacity: 0; transform: translateX(-32px); transition: opacity 0.7s ease, transform 0.7s ease; }
+      .reveal-left.visible { opacity: 1; transform: translateX(0); }
+      .reveal-right { opacity: 0; transform: translateX(32px); transition: opacity 0.7s ease, transform 0.7s ease; }
+      .reveal-right.visible { opacity: 1; transform: translateX(0); }
+
+      /* Menu Cards */
+      .menu-card {
+        background: #16191d;
+        border: 1px solid rgba(255,255,255,0.05);
+        overflow: hidden;
+        transition: all 0.4s cubic-bezier(0.4,0,0.2,1);
+        position: relative;
+      }
+      .menu-card:hover {
+        border-color: rgba(209,160,84,0.4);
+        transform: translateY(-6px);
+        box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(209,160,84,0.1);
+      }
+      .menu-card-img {
+        width: 100%; height: 200px; object-fit: cover;
+        transition: transform 0.6s ease;
+      }
+      .menu-card:hover .menu-card-img { transform: scale(1.08); }
+      .menu-card-overlay {
+        position: absolute; top: 0; left: 0; right: 0; height: 200px;
+        background: linear-gradient(to top, rgba(14,16,19,0.95) 0%, transparent 60%);
+        display: flex; align-items: flex-end; padding: 16px;
+        opacity: 0; transition: opacity 0.3s ease;
+      }
+      .menu-card:hover .menu-card-overlay { opacity: 1; }
+      .menu-card-badge {
+        position: absolute; top: 12px; left: 12px;
+        background: rgba(14,16,19,0.85); backdrop-filter: blur(8px);
+        color: #d1a054; font-size: 9px; font-weight: 700;
+        letter-spacing: 0.15em; text-transform: uppercase;
+        padding: 4px 10px; border: 1px solid rgba(209,160,84,0.3);
+      }
+
+      /* Stat Cards */
+      .stat-card {
+        text-align: center; padding: 2.5rem 1.5rem;
+        border: 1px solid rgba(255,255,255,0.05);
+        background: linear-gradient(135deg, #16191d 0%, #1f2329 100%);
+        position: relative; overflow: hidden;
+        transition: border-color 0.3s ease, transform 0.3s ease;
+      }
+      .stat-card::before {
+        content: ''; position: absolute; inset: 0;
+        background: radial-gradient(circle at 50% 0%, rgba(209,160,84,0.08) 0%, transparent 70%);
+      }
+      .stat-card:hover { border-color: rgba(209,160,84,0.3); transform: translateY(-4px); }
+
+      /* Glassmorphism for modals */
+      .glass-card {
+        background: rgba(22,25,29,0.92);
+        backdrop-filter: blur(20px);
+        border: 1px solid rgba(209,160,84,0.15);
+        box-shadow: 0 25px 80px rgba(0,0,0,0.6);
+      }
+
+      /* Gradient text */
+      .gradient-text {
+        background: linear-gradient(135deg, #e4c590 0%, #d1a054 50%, #b38236 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      /* Section divider */
+      .section-divider {
+        width: 100%; height: 1px;
+        background: linear-gradient(to right, transparent, rgba(209,160,84,0.4), transparent);
+      }
+
+      /* Floating label inputs */
+      .input-line {
+        position: relative;
+      }
+      .input-line::after {
+        content: ''; position: absolute; bottom: 0; left: 0;
+        width: 0; height: 1px; background: #d1a054;
+        transition: width 0.3s ease;
+      }
+      .input-line:focus-within::after { width: 100%; }
+
+      /* Shimmer button */
+      .btn-gold {
+        position: relative; overflow: hidden;
+        background: #d1a054; color: #0e1013;
+        font-weight: 700; text-transform: uppercase; letter-spacing: 0.15em;
+        transition: all 0.3s ease;
+      }
+      .btn-gold::after {
+        content: ''; position: absolute;
+        top: 0; left: -100%; width: 60%; height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent);
+        transform: skewX(-20deg);
+        transition: left 0.5s ease;
+      }
+      .btn-gold:hover { background: #e4c590; box-shadow: 0 8px 25px rgba(209,160,84,0.35); }
+      .btn-gold:hover::after { left: 150%; }
+
+      /* Testimonial card */
+      .testimonial-card {
+        background: #16191d; border: 1px solid rgba(255,255,255,0.05);
+        padding: 2rem; position: relative;
+        transition: border-color 0.3s ease, transform 0.3s ease;
+      }
+      .testimonial-card:hover { border-color: rgba(209,160,84,0.3); transform: translateY(-4px); }
+      .testimonial-card::before {
+        content: '"'; font-family: 'Forum', serif;
+        font-size: 5rem; line-height: 1; color: rgba(209,160,84,0.15);
+        position: absolute; top: 0.5rem; left: 1.5rem;
+      }
+
+      /* Line clamp */
+      .line-clamp-2 {
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+      }
+
+      /* Cart slide animation */
+      @keyframes slideInRight {
+        from { transform: translateX(100%); }
+        to   { transform: translateX(0); }
+      }
+      .animate-slide-in-right { animation: slideInRight 0.35s cubic-bezier(0.4,0,0.2,1) forwards; }
+
+      /* Page load fade */
+      @keyframes pageFadeIn {
+        from { opacity: 0; }
+        to   { opacity: 1; }
+      }
+      body { animation: pageFadeIn 0.6s ease forwards; }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react": "https://aistudiocdn.com/react@^19.2.0",
+    "react-dom": "https://aistudiocdn.com/react-dom@^19.2.0",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
+    "react/": "https://aistudiocdn.com/react@^19.2.0/",
+    "lucide-react": "https://aistudiocdn.com/lucide-react@^0.555.0",
+"react-router-dom": "https://esm.sh/react-router-dom@6.22.3?external=react,react-dom"
+  }
+}
+</script>
+</head>
+  <body class="bg-dark-900 text-gray-300 antialiased selection:bg-gold-500 selection:text-white">
+    <div id="root"></div>
+    <script type="text/babel" data-type="module">
+      import React from 'react';
+      import { createRoot } from 'react-dom/client';
+      import { Utensils, Clock, MapPin, Phone, ChevronRight, Calendar, User, ChevronDown, Facebook, Twitter, Instagram, Youtube, Mail, ArrowUp, X, Menu, ShoppingBag, Plus, Minus, Trash2, Loader2, LogIn, LogOut, Shield, CreditCard, Smartphone, LayoutDashboard, CheckCircle, XCircle, RefreshCw } from 'lucide-react';
+
+      const MENU_ITEMS = [
+        {
+          id: '1',
+          name: 'African Tea & Chapati',
+          description: 'Spiced milk tea with ginger, served with two fresh handmade chapatis.',
+          price: '$8.00',
+          image: 'https://images.unsplash.com/photo-1571934811356-5cc061b6821f?w=400&h=300&fit=crop&q=80',
+          category: 'breakfast',
+        },
+        {
+          id: '7',
+          name: 'Spanish Omelette',
+          description: 'Three farm-fresh eggs with potatoes, onions, and bell peppers, served with toast.',
+          price: '$9.00',
+          image: 'https://images.unsplash.com/photo-1510693206972-df098062cb71?w=400&h=300&fit=crop&q=80',
+          category: 'breakfast',
+        },
+        {
+          id: '8',
+          name: 'Tropical Fruit Platter',
+          description: 'Seasonal selection of sweet mango, papaya, pineapple, passion fruit, and watermelon.',
+          price: '$7.00',
+          image: 'https://images.unsplash.com/photo-1490474418585-ba9bad8fd0ea?w=400&h=300&fit=crop&q=80',
+          category: 'breakfast',
+        },
+        {
+          id: '2',
+          name: 'Agatogo with Beef',
+          description: 'Plantains stewed with tender beef cubes, tomatoes, and traditional spices.',
+          price: '$15.00',
+          image: 'https://images.unsplash.com/photo-1547592166-23ac45744acd?w=400&h=300&fit=crop&q=80',
+          category: 'lunch',
+        },
+        {
+          id: '3',
+          name: 'Isombe with Funge',
+          description: 'Mashed cassava leaves with spinach, eggplant, and peanut sauce.',
+          price: '$12.00',
+          image: 'https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=400&h=300&fit=crop&q=80',
+          category: 'lunch',
+        },
+        {
+          id: '9',
+          name: 'Whole Grilled Tilapia',
+          description: 'Fresh giant Tilapia from Lake Kivu, marinated and grilled, served with fried plantains.',
+          price: '$22.00',
+          image: 'https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=400&h=300&fit=crop&q=80',
+          category: 'lunch',
+        },
+        {
+          id: '10',
+          name: 'Coconut Chicken Curry',
+          description: 'Tender chicken breast simmered in fresh coconut milk, turmeric, and coriander.',
+          price: '$16.00',
+          image: 'https://images.unsplash.com/photo-1631452180519-c014fe946bc7?w=400&h=300&fit=crop&q=80',
+          category: 'lunch',
+        },
+        {
+          id: '4',
+          name: 'Goat Brochettes',
+          description: 'Charcoal-grilled goat meat skewers marinated in local herbs, served with fries.',
+          price: '$18.00',
+          image: 'https://images.unsplash.com/photo-1529042410759-befb1204b468?w=400&h=300&fit=crop&q=80',
+          category: 'dinner',
+        },
+        {
+          id: '5',
+          name: 'Lake Kivu Sambaza',
+          description: 'Crispy fried small fish from Lake Kivu, served with lemon and pili-pili sauce.',
+          price: '$16.00',
+          image: 'https://images.unsplash.com/photo-1580476262798-bddd9f4b7369?w=400&h=300&fit=crop&q=80',
+          category: 'dinner',
+        },
+        {
+          id: '6',
+          name: 'Akabenz Ribs',
+          description: 'Slow-roasted marinated pork ribs, glazed with a sweet and tangy bbq sauce.',
+          price: '$20.00',
+          image: 'https://images.unsplash.com/photo-1544025162-d76538891de6?w=400&h=300&fit=crop&q=80',
+          category: 'dinner',
+        },
+        {
+          id: '11',
+          name: 'Pepper Steak',
+          description: 'Premium beef tenderloin grilled to your liking with cracked peppercorn sauce.',
+          price: '$24.00',
+          image: 'https://images.unsplash.com/photo-1558030006-450675393462?w=400&h=300&fit=crop&q=80',
+          category: 'dinner',
+        },
+        {
+          id: '12',
+          name: 'Rwandan Specialty Coffee',
+          description: 'Premium single-origin Bourbon Arabica coffee, freshly brewed (Black or with Milk).',
+          price: '$4.00',
+          image: 'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=400&h=300&fit=crop&q=80',
+          category: 'drinks',
+        },
+        {
+          id: '13',
+          name: 'Fresh Passion Juice',
+          description: 'Freshly squeezed passion fruit juice, sweet and tangy.',
+          price: '$5.00',
+          image: 'https://images.unsplash.com/photo-1621506289937-a8e4df240d0b?w=400&h=300&fit=crop&q=80',
+          category: 'drinks',
+        },
+        {
+          id: '14',
+          name: 'Ikivuguto',
+          description: 'Traditional fermented milk, rich, creamy and naturally refreshing.',
+          price: '$3.00',
+          image: 'https://images.unsplash.com/photo-1488477181946-6428a0291777?w=400&h=300&fit=crop&q=80',
+          category: 'drinks',
+        },
+        {
+          id: '15',
+          name: 'Virunga Mist Cocktail',
+          description: 'Gin infused with local herbs, tonic, lime, and a hint of honey.',
+          price: '$10.00',
+          image: 'https://images.unsplash.com/photo-1514362545857-3bc16549766b?w=400&h=300&fit=crop&q=80',
+          category: 'drinks',
+        },
+      ];
+
+      // Backend API Service — auto-switches between local and production
+      const API_URL = (window.location.hostname === 'localhost' || window.location.protocol === 'file:')
+        ? 'http://localhost:5000/api'
+        : 'https://YOUR_RAILWAY_URL.up.railway.app/api';
+
+      const Backend = {
+        async createReservation(data) {
+          const res = await fetch(`${API_URL}/reservations`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data),
+          });
+          if (!res.ok) throw new Error('Failed to create reservation');
+          const result = await res.json();
+          return { success: true, message: "Reservation confirmed!", data: result };
+        },
+
+        async placeOrder(order) {
+          const res = await fetch(`${API_URL}/orders`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(order),
+          });
+          if (!res.ok) throw new Error('Failed to place order');
+          const result = await res.json();
+          return { success: true, message: "Order received! Kitchen is preparing your meal.", data: result };
+        },
+
+        async login(email, password) {
+          const res = await fetch(`${API_URL}/auth/login`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, password }),
+          });
+          const result = await res.json();
+          if (!res.ok) throw new Error(result.error || 'Login failed');
+          return result;
+        },
+
+        async register(name, email, password, phone) {
+          const res = await fetch(`${API_URL}/auth/register`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ name, email, password, phone }),
+          });
+          const result = await res.json();
+          if (!res.ok) throw new Error(result.error || 'Registration failed');
+          return result;
+        },
+
+        async adminLogin(email, password) {
+          const res = await fetch(`${API_URL}/auth/admin-login`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, password }),
+          });
+          const result = await res.json();
+          if (!res.ok) throw new Error(result.error || 'Admin login failed');
+          return result;
+        },
+
+        async getReservations(token) {
+          const res = await fetch(`${API_URL}/reservations`, {
+            headers: { 'Authorization': `Bearer ${token}` },
+          });
+          const result = await res.json();
+          if (!res.ok) throw new Error(result.error || 'Failed to load reservations');
+          return result.data;
+        },
+
+        async getOrders(token) {
+          const res = await fetch(`${API_URL}/orders`, {
+            headers: { 'Authorization': `Bearer ${token}` },
+          });
+          const result = await res.json();
+          if (!res.ok) throw new Error(result.error || 'Failed to load orders');
+          return result.data;
+        },
+
+        async updateReservationStatus(id, status, token) {
+          const res = await fetch(`${API_URL}/reservations/${id}`, {
+            method: 'PATCH',
+            headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
+            body: JSON.stringify({ status }),
+          });
+          if (!res.ok) throw new Error('Failed to update status');
+          return (await res.json()).data;
+        },
+
+        async updateOrderStatus(id, status, token) {
+          const res = await fetch(`${API_URL}/orders/${id}`, {
+            method: 'PATCH',
+            headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
+            body: JSON.stringify({ status }),
+          });
+          if (!res.ok) throw new Error('Failed to update status');
+          return (await res.json()).data;
+        },
+      };
+
+      const HERO_SLIDES = [
+        "https://images.unsplash.com/photo-1514362545857-3bc16549766b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80",
+        "https://images.unsplash.com/photo-1559339352-11d035aa65de?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80",
+        "https://images.unsplash.com/photo-1544148103-0773bf10d330?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80"
+      ];
+
+      const NAV_LINKS = [
+        { name: 'Home', href: '#home' },
+        { name: 'Menu', href: '#menu' },
+        { name: 'About', href: '#about' },
+        { name: 'Reservations', href: '#reservation' },
+        { name: 'Contact', href: '#contact' }
+      ];
+
+      const App = () => {
+        const [scrolled, setScrolled] = React.useState(false);
+        const [showBackToTop, setShowBackToTop] = React.useState(false);
+        const [currentSlide, setCurrentSlide] = React.useState(0);
+        const [isModalOpen, setIsModalOpen] = React.useState(false);
+        const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
+        const [cart, setCart] = React.useState([]);
+        const [isCartOpen, setIsCartOpen] = React.useState(false);
+        const [isSubmitting, setIsSubmitting] = React.useState(false);
+        const [isInlineSubmitting, setIsInlineSubmitting] = React.useState(false);
+        const [toasts, setToasts] = React.useState([]);
+        const [activeCategory, setActiveCategory] = React.useState('all');
+        const [apiStatus, setApiStatus] = React.useState('checking');
+        const [paymentMethod, setPaymentMethod] = React.useState('cash');
+        const [momoPhone, setMomoPhone] = React.useState('');
+
+        // Auth state
+        const [authToken, setAuthToken] = React.useState(() => localStorage.getItem('cafe_token'));
+        const [authUser, setAuthUser] = React.useState(() => {
+          try { return JSON.parse(localStorage.getItem('cafe_user')); } catch { return null; }
+        });
+        const [isAuthOpen, setIsAuthOpen] = React.useState(false);
+        const [authTab, setAuthTab] = React.useState('login'); // 'login' | 'register'
+        const [authLoading, setAuthLoading] = React.useState(false);
+
+        // Admin state
+        const [isAdminOpen, setIsAdminOpen] = React.useState(false);
+        const [adminTab, setAdminTab] = React.useState('bookings'); // 'bookings' | 'orders'
+        const [adminBookings, setAdminBookings] = React.useState([]);
+        const [adminOrders, setAdminOrders] = React.useState([]);
+        const [adminLoading, setAdminLoading] = React.useState(false);
+
+        const showToast = (message, type = 'success') => {
+          const id = Date.now();
+          setToasts(prev => [...prev, { id, message, type }]);
+          setTimeout(() => setToasts(prev => prev.filter(t => t.id !== id)), 4500);
+        };
+
+        // Check backend connection on load
+        React.useEffect(() => {
+          fetch('http://localhost:5000/api/health')
+            .then(r => r.ok ? setApiStatus('online') : setApiStatus('offline'))
+            .catch(() => setApiStatus('offline'));
+        }, []);
+
+        // Scroll reveal
+        React.useEffect(() => {
+          const observer = new IntersectionObserver(
+            (entries) => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }),
+            { threshold: 0.12 }
+          );
+          document.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach(el => observer.observe(el));
+          return () => observer.disconnect();
+        }, [activeCategory]);
+
+        React.useEffect(() => {
+          const handleScroll = () => {
+            setScrolled(window.scrollY > 50);
+            setShowBackToTop(window.scrollY > 300);
+          };
+
+          window.addEventListener('scroll', handleScroll);
+          return () => window.removeEventListener('scroll', handleScroll);
+        }, []);
+
+        React.useEffect(() => {
+          const timer = setInterval(() => {
+            setCurrentSlide((prev) => (prev + 1) % HERO_SLIDES.length);
+          }, 5000);
+          return () => clearInterval(timer);
+        }, []);
+
+        const addToCart = (item) => {
+          setCart(prev => {
+            const existing = prev.find(i => i.id === item.id);
+            if (existing) {
+              return prev.map(i => i.id === item.id ? { ...i, quantity: i.quantity + 1 } : i);
+            }
+            return [...prev, { ...item, quantity: 1 }];
+          });
+          setIsCartOpen(true);
+        };
+
+        const updateQuantity = (id, delta) => {
+          setCart(prev => prev.map(i => {
+            if (i.id === id) {
+              return { ...i, quantity: Math.max(0, i.quantity + delta) };
+            }
+            return i;
+          }).filter(i => i.quantity > 0));
+        };
+
+        const cartTotal = cart.reduce((sum, item) => {
+            const price = parseFloat(item.price.replace('$', ''));
+            return sum + (price * item.quantity);
+        }, 0);
+
+        const scrollToTop = () => {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        };
+
+        const handleReservation = async (e) => {
+            e.preventDefault();
+            setIsSubmitting(true);
+            const formData = new FormData(e.target);
+            const data = Object.fromEntries(formData.entries());
+            try {
+              await Backend.createReservation(data);
+              setIsModalOpen(false);
+              e.target.reset();
+              showToast('Reservation confirmed! We look forward to welcoming you.', 'success');
+            } catch (err) {
+              showToast('Could not connect to server. Please make sure the backend is running.', 'error');
+            } finally {
+              setIsSubmitting(false);
+            }
+        };
+
+        const handleInlineReservation = async (e) => {
+            e.preventDefault();
+            setIsInlineSubmitting(true);
+            const formData = new FormData(e.target);
+            const data = Object.fromEntries(formData.entries());
+            try {
+              await Backend.createReservation(data);
+              e.target.reset();
+              showToast('Reservation confirmed! We look forward to welcoming you.', 'success');
+            } catch (err) {
+              showToast('Could not connect to server. Please make sure the backend is running.', 'error');
+            } finally {
+              setIsInlineSubmitting(false);
+            }
+        };
+
+        const handleCheckout = async () => {
+            setIsSubmitting(true);
+            try {
+              const orderData = {
+                items: cart,
+                total: cartTotal,
+                customerName: authUser?.name || 'Guest',
+                customerEmail: authUser?.email,
+                paymentMethod,
+              };
+              await Backend.placeOrder(orderData);
+              setCart([]);
+              setIsCartOpen(false);
+              setPaymentMethod('cash');
+              showToast('Order placed! Our kitchen is preparing your meal.', 'success');
+            } catch (err) {
+              showToast('Could not place order. Please make sure the backend is running.', 'error');
+            } finally {
+              setIsSubmitting(false);
+            }
+        };
+
+        const handleAuthSubmit = async (e) => {
+          e.preventDefault();
+          setAuthLoading(true);
+          const fd = new FormData(e.target);
+          try {
+            let result;
+            if (authTab === 'login') {
+              result = await Backend.login(fd.get('email'), fd.get('password'));
+            } else {
+              result = await Backend.register(fd.get('name'), fd.get('email'), fd.get('password'), fd.get('phone'));
+            }
+            const { token, data } = result;
+            localStorage.setItem('cafe_token', token);
+            localStorage.setItem('cafe_user', JSON.stringify(data));
+            setAuthToken(token);
+            setAuthUser(data);
+            setIsAuthOpen(false);
+            showToast(`Welcome, ${data.name}!`, 'success');
+          } catch (err) {
+            showToast(err.message || 'Authentication failed', 'error');
+          } finally {
+            setAuthLoading(false);
+          }
+        };
+
+        const handleLogout = () => {
+          localStorage.removeItem('cafe_token');
+          localStorage.removeItem('cafe_user');
+          setAuthToken(null);
+          setAuthUser(null);
+          setIsAdminOpen(false);
+          showToast('Logged out successfully', 'info');
+        };
+
+        const loadAdminData = async () => {
+          setAdminLoading(true);
+          try {
+            const [bookings, orders] = await Promise.all([
+              Backend.getReservations(authToken),
+              Backend.getOrders(authToken),
+            ]);
+            setAdminBookings(bookings || []);
+            setAdminOrders(orders || []);
+          } catch (err) {
+            showToast('Failed to load data: ' + err.message, 'error');
+          } finally {
+            setAdminLoading(false);
+          }
+        };
+
+        const openAdmin = () => {
+          setIsAdminOpen(true);
+          loadAdminData();
+        };
+
+        const handleBookingStatus = async (id, status) => {
+          try {
+            const updated = await Backend.updateReservationStatus(id, status, authToken);
+            setAdminBookings(prev => prev.map(b => b._id === id ? { ...b, status: updated.status } : b));
+            showToast(`Booking ${status}`, 'success');
+          } catch (err) {
+            showToast('Failed to update: ' + err.message, 'error');
+          }
+        };
+
+        const handleOrderStatus = async (id, status) => {
+          try {
+            const updated = await Backend.updateOrderStatus(id, status, authToken);
+            setAdminOrders(prev => prev.map(o => o._id === id ? { ...o, status: updated.status } : o));
+            showToast(`Order marked as ${status}`, 'success');
+          } catch (err) {
+            showToast('Failed to update: ' + err.message, 'error');
+          }
+        };
+
+        return (
+          <div className="min-h-screen flex flex-col">
+            {/* Navbar */}
+            <nav className={`fixed w-full z-50 transition-all duration-300 ${
+              scrolled ? 'bg-dark-900/95 backdrop-blur-md border-b border-white/10 py-0 shadow-lg' : 'bg-transparent py-4'
+            }`}>
+              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div className="flex items-center justify-between h-20">
+                  <div className="flex-shrink-0">
+                    <span className="font-serif text-2xl text-gold-500 font-bold tracking-wider">CAFE ACACIA</span>
+                  </div>
+                  
+                  {/* Desktop Menu */}
+                  <div className="hidden md:block">
+                    <div className="ml-10 flex items-baseline space-x-8">
+                      {NAV_LINKS.map((item) => (
+                        <a key={item.name} href={item.href} className="text-gray-300 hover:text-gold-500 transition-colors px-3 py-2 rounded-md text-sm font-medium uppercase tracking-widest">
+                          {item.name}
+                        </a>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* API Status + Auth + Admin */}
+                  <div className="hidden md:flex items-center gap-3">
+                    <span className={`api-badge ${apiStatus === 'online' ? 'api-online' : 'api-offline'}`}>
+                      <span className={`api-dot ${apiStatus === 'online' ? 'api-dot-online' : 'api-dot-offline'}`}></span>
+                      {apiStatus === 'online' ? 'Server Online' : apiStatus === 'offline' ? 'Server Offline' : 'Connecting...'}
+                    </span>
+                    {authUser ? (
+                      <>
+                        {authUser.role === 'admin' && (
+                          <button onClick={openAdmin} className="flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest text-gold-500 border border-gold-500/40 px-3 py-1.5 hover:bg-gold-500 hover:text-dark-900 transition-all">
+                            <LayoutDashboard size={14} /> Admin
+                          </button>
+                        )}
+                        <span className="text-gray-400 text-xs">{authUser.name}</span>
+                        <button onClick={handleLogout} className="text-gray-500 hover:text-red-400 transition-colors" title="Logout">
+                          <LogOut size={16} />
+                        </button>
+                      </>
+                    ) : (
+                      <button onClick={() => { setAuthTab('login'); setIsAuthOpen(true); }} className="flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest text-gray-400 hover:text-gold-500 transition-colors">
+                        <LogIn size={14} /> Login
+                      </button>
+                    )}
+                  </div>
+
+                  {/* Cart Button */}
+                  <button onClick={() => setIsCartOpen(true)} className="relative text-gray-300 hover:text-gold-500 transition-colors p-2 mr-2 md:mr-0">
+                    <ShoppingBag size={24} />
+                    {cart.length > 0 && (
+                      <span className="absolute -top-1 -right-1 bg-gold-500 text-dark-900 text-[10px] font-bold w-4 h-4 flex items-center justify-center rounded-full">
+                        {cart.reduce((acc, item) => acc + item.quantity, 0)}
+                      </span>
+                    )}
+                  </button>
+
+                  {/* Mobile Menu Button */}
+                  <div className="md:hidden">
+                    <button onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} className="text-gray-300 hover:text-gold-500 transition-colors p-2 relative z-50">
+                      {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              {/* Mobile Menu Overlay */}
+              <div className={`fixed inset-0 bg-dark-900/95 backdrop-blur-xl z-40 transition-transform duration-300 md:hidden flex flex-col items-center justify-center gap-8 ${isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}>
+                {NAV_LINKS.map((item) => (
+                  <a 
+                    key={item.name} 
+                    href={item.href} 
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className="text-2xl font-serif text-white hover:text-gold-500 transition-colors"
+                  >
+                    {item.name}
+                  </a>
+                ))}
+                <button 
+                    onClick={() => { setIsMobileMenuOpen(false); setIsModalOpen(true); }}
+                    className="mt-4 border border-gold-500 text-gold-500 px-8 py-3 uppercase tracking-widest font-bold hover:bg-gold-500 hover:text-dark-900 transition-colors"
+                  >
+                    Book a Table
+                  </button>
+              </div>
+            </nav>
+
+            {/* Hero Section */}
+            <section id="home" className="relative h-screen flex items-center justify-center bg-dark-900 overflow-hidden">
+              {HERO_SLIDES.map((slide, index) => (
+                <div 
+                  key={index}
+                  className={`absolute inset-0 bg-cover bg-center transition-opacity duration-1000 ${index === currentSlide ? 'opacity-40' : 'opacity-0'}`}
+                  style={{ backgroundImage: `url('${slide}')` }}
+                ></div>
+              ))}
+              <div className="absolute inset-0 bg-gradient-to-t from-dark-900 via-dark-900/50 to-transparent"></div>
+              
+              <div className="relative z-10 text-center px-4 max-w-4xl mx-auto animate-fade-in">
+                <div className="separator mb-6">
+                  <span className="separator-icon"></span>
+                  <span className="text-gold-500 uppercase tracking-[0.2em] text-sm">The Art of Dining</span>
+                  <span className="separator-icon"></span>
+                </div>
+                <h1 className="font-serif text-5xl md:text-7xl lg:text-8xl text-white mb-8 leading-tight">
+                  The Pure Taste of <br/>
+                  <span className="text-gold-500">Acacia</span>
+                </h1>
+                <p className="text-gray-400 text-lg md:text-xl max-w-2xl mx-auto mb-10 font-light leading-relaxed">
+                  Experience a culinary journey where tradition meets innovation. 
+                  Every dish tells a story of flavor, passion, and excellence.
+                </p>
+                <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                  <a href="#menu" className="btn-gold px-8 py-4 inline-block text-sm tracking-widest">
+                    View Menu
+                  </a>
+                  <button
+                    onClick={() => setIsModalOpen(true)}
+                    className="border border-gold-500 text-gold-500 px-8 py-4 uppercase tracking-widest font-bold text-sm hover:bg-gold-500 hover:text-dark-900 transition-all duration-300 hover:shadow-[0_8px_25px_rgba(209,160,84,0.3)]"
+                  >
+                    Book a Table
+                  </button>
+                </div>
+              </div>
+            </section>
+
+            {/* Features */}
+            <section className="py-20 bg-dark-800 relative">
+              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                  {[
+                    { icon: Clock, title: "Opening Hours", text: "Mon-Sun: 09:00 AM - 10:00 PM" },
+                    { icon: MapPin, title: "Location", text: "Kisiment Kg 201 Rukiri 2, Kigali" },
+                    { icon: Phone, title: "Reservations", text: "+250 787 217 72" }
+                  ].map((feature, idx) => (
+                    <div key={idx} className={`reveal bg-dark-700 p-8 text-center border border-white/5 hover:border-gold-500/30 transition-all duration-300 group`} style={{transitionDelay:`${idx*0.12}s`}}>
+                      <div className="w-16 h-16 rounded-full bg-gold-500/10 border border-gold-500/20 flex items-center justify-center mx-auto mb-6 group-hover:bg-gold-500/20 transition-colors">
+                        <feature.icon className="w-7 h-7 text-gold-500 group-hover:scale-110 transition-transform duration-300" />
+                      </div>
+                      <h3 className="font-serif text-xl text-white mb-3">{feature.title}</h3>
+                      <p className="text-gray-400 text-sm font-sans">{feature.text}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </section>
+
+            {/* Stats */}
+            <section className="py-16 bg-dark-900">
+              <div className="section-divider mb-16"></div>
+              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                  {[
+                    { number: '12+', label: 'Years of Excellence' },
+                    { number: '50+', label: 'Signature Dishes' },
+                    { number: '10K+', label: 'Happy Guests' },
+                    { number: '8', label: 'Award Winning Chef' },
+                  ].map((stat, i) => (
+                    <div key={i} className="stat-card reveal" style={{transitionDelay:`${i*0.1}s`}}>
+                      <p className="gradient-text font-serif text-4xl md:text-5xl font-bold mb-2">{stat.number}</p>
+                      <p className="text-gray-500 text-xs uppercase tracking-widest">{stat.label}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+              <div className="section-divider mt-16"></div>
+            </section>
+
+            {/* Menu Section */}
+            <section id="menu" className="py-24 bg-dark-900">
+              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div className="text-center mb-12 reveal">
+                  <span className="text-gold-500 font-serif italic text-xl">Discover</span>
+                  <h2 className="text-4xl md:text-5xl font-serif text-white mt-2 mb-4">Our Menu</h2>
+                  <div className="w-24 h-1 bg-gold-500 mx-auto mb-10"></div>
+
+                  {/* Category Filter Tabs */}
+                  <div className="flex flex-wrap justify-center gap-2">
+                    {['all', 'breakfast', 'lunch', 'dinner', 'drinks'].map(cat => (
+                      <button
+                        key={cat}
+                        onClick={() => setActiveCategory(cat)}
+                        className={`cat-tab ${activeCategory === cat ? 'active' : ''}`}
+                      >
+                        {cat === 'all' ? 'All Items' : cat}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+                  {MENU_ITEMS.filter(item => activeCategory === 'all' || item.category === activeCategory).map((item, idx) => (
+                    <div key={item.id} className="menu-card reveal" style={{transitionDelay:`${(idx % 4) * 0.08}s`}}>
+                      <div className="relative overflow-hidden" style={{height:'200px'}}>
+                        <img src={item.image} alt={item.name} className="menu-card-img" style={{width:'100%',height:'100%',objectFit:'cover'}} />
+                        <div className="menu-card-overlay">
+                          <button
+                            onClick={() => { addToCart(item); showToast(`${item.name} added to your order`, 'info'); }}
+                            className="w-full py-2.5 btn-gold text-xs tracking-widest flex items-center justify-center gap-2"
+                          >
+                            <Plus size={14} /> Add to Order
+                          </button>
+                        </div>
+                        <span className="menu-card-badge">{item.category}</span>
+                      </div>
+                      <div className="p-4">
+                        <div className="flex justify-between items-start mb-2">
+                          <h3 className="font-serif text-white text-base leading-tight flex-1 pr-2 group-hover:text-gold-500 transition-colors">{item.name}</h3>
+                          <span className="text-gold-500 font-bold text-base shrink-0">{item.price}</span>
+                        </div>
+                        <p className="text-gray-500 text-xs leading-relaxed mb-4 line-clamp-2">{item.description}</p>
+                        <button
+                          onClick={() => { addToCart(item); showToast(`${item.name} added to your order`, 'info'); }}
+                          className="w-full py-2 btn-gold text-[10px] tracking-widest flex items-center justify-center gap-1.5"
+                        >
+                          <Plus size={12} /> Add to Order
+                        </button>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+
+                {MENU_ITEMS.filter(item => activeCategory === 'all' || item.category === activeCategory).length === 0 && (
+                  <p className="text-center text-gray-500 py-16">No items in this category.</p>
+                )}
+              </div>
+            </section>
+
+            {/* About Us Section */}
+            <section id="about" className="py-24 bg-dark-900 relative overflow-hidden">
+              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <div className="flex flex-col lg:flex-row items-center gap-16">
+                  <div className="lg:w-1/2 reveal-left">
+                    <div className="relative">
+                      <div className="absolute -top-4 -left-4 w-24 h-24 border-t-2 border-l-2 border-gold-500/50"></div>
+                      <img src="https://images.unsplash.com/photo-1577219491135-ce391730fb2c?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Chef" className="w-full h-auto rounded-sm shadow-2xl relative z-10 grayscale hover:grayscale-0 transition-all duration-700" />
+                      <div className="absolute -bottom-4 -right-4 w-24 h-24 border-b-2 border-r-2 border-gold-500/50"></div>
+                    </div>
+                  </div>
+                  <div className="lg:w-1/2 text-center lg:text-left reveal-right">
+                    <span className="text-gold-500 font-serif italic text-xl">Our Story</span>
+                    <h2 className="text-4xl md:text-5xl font-serif text-white mt-2 mb-6">The Chef's Kitchen</h2>
+                    <p className="text-gray-400 mb-8 leading-relaxed text-lg">
+                      At Cafe Acacia, we believe that food is more than just sustenance—it is a language of love, heritage, and creativity. Our journey began with a simple passion for authentic flavors and has grown into a culinary destination.
+                    </p>
+                    <blockquote className="relative border-l-4 border-gold-500 pl-6 italic text-gray-300 text-xl mb-8">
+                      "Cooking is an art, but all art requires knowing something about the techniques and materials. We strive to bring the soul of the ingredients to your plate."
+                    </blockquote>
+                    <div className="flex items-center justify-center lg:justify-start gap-4">
+                       <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Head Chef" className="w-12 h-12 rounded-full border border-gold-500" />
+                       <div>
+                         <p className="text-white font-serif text-lg">Antoine R.</p>
+                         <p className="text-gold-500 text-xs uppercase tracking-widest">Head Chef</p>
+                       </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            {/* Testimonials */}
+            <section className="py-24 bg-dark-800">
+              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div className="text-center mb-14 reveal">
+                  <span className="text-gold-500 font-serif italic text-xl">Kind Words</span>
+                  <h2 className="text-4xl md:text-5xl font-serif text-white mt-2 mb-4">Guest Reviews</h2>
+                  <div className="w-24 h-1 bg-gold-500 mx-auto"></div>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                  {[
+                    { name: 'Sarah M.', role: 'Food Blogger', text: 'The Goat Brochettes were absolutely divine — perfectly charred outside, tender inside. This place is a hidden gem in Kigali.', avatar: 'https://randomuser.me/api/portraits/women/44.jpg', stars: 5 },
+                    { name: 'James K.', role: 'Regular Guest', text: 'Cafe Acacia never disappoints. The ambiance is elegant, the service impeccable, and the Lake Kivu Sambaza is unlike anything else.', avatar: 'https://randomuser.me/api/portraits/men/46.jpg', stars: 5 },
+                    { name: 'Amina R.', role: 'Travel Writer', text: 'Visited during my Rwanda trip and was blown away. Authentic flavors, beautiful presentation, and warm hospitality. A must-visit!', avatar: 'https://randomuser.me/api/portraits/women/68.jpg', stars: 5 },
+                  ].map((t, i) => (
+                    <div key={i} className={`testimonial-card reveal`} style={{transitionDelay:`${i*0.15}s`}}>
+                      <div className="flex gap-1 mb-4 mt-6">
+                        {[...Array(t.stars)].map((_, s) => <span key={s} className="text-gold-500 text-sm">★</span>)}
+                      </div>
+                      <p className="text-gray-400 text-sm leading-relaxed mb-6 italic">"{t.text}"</p>
+                      <div className="flex items-center gap-3">
+                        <img src={t.avatar} alt={t.name} className="w-10 h-10 rounded-full border border-gold-500/30" />
+                        <div>
+                          <p className="text-white font-serif text-sm">{t.name}</p>
+                          <p className="text-gold-500 text-xs uppercase tracking-widest">{t.role}</p>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </section>
+
+            {/* Reservation Section */}
+            <section id="reservation" className="py-24 bg-dark-800 relative">
+              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <div className="flex flex-col lg:flex-row gap-16 items-center">
+                    
+                    <div className="lg:w-1/3 text-center lg:text-left">
+                        <p className="text-gold-500 font-serif italic text-xl mb-2">Online Reservation</p>
+                        <div className="w-24 h-1 bg-gold-500 mx-auto lg:mx-0 mb-6"></div>
+                        <h2 className="text-4xl md:text-5xl font-serif text-white mb-6">
+                            Book a Table
+                        </h2>
+                        <p className="text-gray-400 mb-8 leading-relaxed">
+                            Secure your spot at Cafe Acacia. Whether you are joining us for a quick lunch or a romantic dinner, we look forward to hosting you.
+                        </p>
+                    </div>
+
+                    <div className="lg:w-2/3 bg-dark-900/80 backdrop-blur-sm p-8 md:p-12 rounded-sm shadow-2xl border border-white/5 w-full">
+                        <form onSubmit={handleInlineReservation} className="space-y-6">
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                                <div className="relative group">
+                                    <div className="absolute top-3 left-0 text-gold-500">
+                                        <User size={18} />
+                                    </div>
+                                    <input 
+                                        type="text"
+                                        name="name" 
+                                        placeholder="Your Name" 
+                                        required
+                                        className="w-full bg-transparent text-white pl-8 pr-4 py-3 border-b border-gray-700 focus:border-gold-500 focus:outline-none transition-colors placeholder-gray-500" 
+                                    />
+                                </div>
+                                <div className="relative group">
+                                    <div className="absolute top-3 left-0 text-gold-500 font-bold text-sm">
+                                        <Phone size={18} />
+                                    </div>
+                                    <input 
+                                        type="tel"
+                                        name="phone" 
+                                        placeholder="Phone Number" 
+                                        required
+                                        className="w-full bg-transparent text-white pl-8 pr-4 py-3 border-b border-gray-700 focus:border-gold-500 focus:outline-none transition-colors placeholder-gray-500" 
+                                    />
+                                </div>
+                            </div>
+
+                            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                                <div className="relative group">
+                                    <div className="absolute top-3 left-0 text-gold-500 pointer-events-none">
+                                        <User size={18} />
+                                    </div>
+                                     <select 
+                                        name="persons" 
+                                        className="w-full bg-transparent text-white pl-8 pr-4 py-3 border-b border-gray-700 focus:border-gold-500 focus:outline-none appearance-none cursor-pointer text-gray-400"
+                                    >
+                                        <option>1 Person</option>
+                                        <option>2 Persons</option>
+                                        <option>3 Persons</option>
+                                        <option>4 Persons</option>
+                                        <option>5+ Persons</option>
+                                    </select>
+                                    <ChevronDown size={14} className="absolute top-4 right-0 text-gray-600 pointer-events-none" />
+                                </div>
+                                <div className="relative group">
+                                    <div className="absolute top-3 left-0 text-gold-500 pointer-events-none">
+                                        <Calendar size={18} />
+                                    </div>
+                                    <input 
+                                        type="date"
+                                        name="date" 
+                                        required
+                                        className="w-full bg-transparent text-white pl-8 pr-4 py-3 border-b border-gray-700 focus:border-gold-500 focus:outline-none text-gray-400" 
+                                    />
+                                </div>
+                                <div className="relative group">
+                                    <div className="absolute top-3 left-0 text-gold-500 pointer-events-none">
+                                        <Clock size={18} />
+                                    </div>
+                                    <select name="time" className="w-full bg-transparent text-white pl-8 pr-4 py-3 border-b border-gray-700 focus:border-gold-500 focus:outline-none appearance-none cursor-pointer text-gray-400">
+                                        <option>08:00 AM</option>
+                                        <option>09:00 AM</option>
+                                        <option>10:00 AM</option>
+                                        <option>11:00 AM</option>
+                                        <option>12:00 PM</option>
+                                        <option>01:00 PM</option>
+                                        <option>05:00 PM</option>
+                                        <option>06:00 PM</option>
+                                        <option>07:00 PM</option>
+                                        <option>08:00 PM</option>
+                                        <option>09:00 PM</option>
+                                    </select>
+                                    <ChevronDown size={14} className="absolute top-4 right-0 text-gray-600 pointer-events-none" />
+                                </div>
+                            </div>
+
+                            <button
+                                type="submit"
+                                disabled={isInlineSubmitting}
+                                className="w-full py-4 btn-gold text-sm tracking-widest disabled:opacity-70 disabled:cursor-not-allowed flex justify-center items-center gap-2"
+                            >
+                                {isInlineSubmitting ? <><Loader2 className="animate-spin" size={20} /> Processing...</> : 'Confirm Booking'}
+                            </button>
+                        </form>
+                    </div>
+                </div>
+              </div>
+            </section>
+
+            {/* Footer Section */}
+            <footer id="contact" className="bg-dark-900 pt-20 pb-10 border-t border-white/10">
+              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+                  {/* Brand */}
+                  <div>
+                    <span className="font-serif text-2xl text-gold-500 font-bold tracking-wider block mb-6">CAFE ACACIA</span>
+                    <p className="text-gray-400 mb-6 leading-relaxed">
+                      Restaurant authentic and tasty food, taste perception to last a lifetime. We create delicious memories.
+                    </p>
+                    <div className="flex gap-4">
+                      {[Facebook, Twitter, Instagram, Youtube].map((Icon, i) => (
+                        <a key={i} href="#" className="w-10 h-10 rounded-full bg-dark-800 flex items-center justify-center text-gray-400 hover:bg-gold-500 hover:text-dark-900 transition-all border border-gray-700 hover:border-gold-500">
+                          <Icon size={18} />
+                        </a>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Quick Links */}
+                  <div>
+                    <h4 className="text-white font-serif text-xl mb-6">Quick Links</h4>
+                    <ul className="space-y-4">
+                      {NAV_LINKS.slice(0, 4).map((link) => (
+                        <li key={link.name}><a href={link.href} className="text-gray-400 hover:text-gold-500 transition-colors flex items-center gap-2 group"><span className="text-gold-500">›</span> {link.name}</a></li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  {/* Contact */}
+                  <div>
+                    <h4 className="text-white font-serif text-xl mb-6">Contact Us</h4>
+                    <ul className="space-y-6">
+                      <li className="flex items-start gap-3 text-gray-400">
+                        <MapPin className="text-gold-500 shrink-0 mt-1" size={18} />
+                        <span>Kisiment kg 201 Rukiri 2 <br/> house no. 10A, Kigali, Rwanda</span>
+                      </li>
+                      <li className="flex items-center gap-3 text-gray-400">
+                        <Phone className="text-gold-500 shrink-0" size={18} />
+                        <span>+250 787 217 72</span>
+                      </li>
+                      <li className="flex items-center gap-3 text-gray-400">
+                        <Mail className="text-gold-500 shrink-0" size={18} />
+                        <span>info@cafeacacia.com</span>
+                      </li>
+                    </ul>
+                  </div>
+
+                  {/* Hours */}
+                  <div>
+                    <h4 className="text-white font-serif text-xl mb-6">Opening Hours</h4>
+                    <ul className="space-y-3 text-gray-400">
+                      <li className="flex justify-between border-b border-gray-800 pb-2">
+                        <span>Mon - Fri</span>
+                        <span className="text-gold-500">09:00 - 22:00</span>
+                      </li>
+                      <li className="flex justify-between border-b border-gray-800 pb-2">
+                        <span>Saturday</span>
+                        <span className="text-gold-500">10:00 - 23:00</span>
+                      </li>
+                      <li className="flex justify-between pb-2">
+                        <span>Sunday</span>
+                        <span className="text-gold-500">10:00 - 23:00</span>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                
+                <div className="border-t border-gray-800 pt-8 text-center">
+                  <p className="text-gray-500 text-sm">
+                    &copy; 2024 <span className="text-gold-500">Cafe Acacia</span>. All Rights Reserved.
+                  </p>
+                </div>
+              </div>
+            </footer>
+
+            {/* Back to Top Button */}
+            <button 
+              onClick={scrollToTop}
+              className={`fixed bottom-8 right-8 bg-gold-500 text-dark-900 p-3 rounded-full shadow-lg z-50 transition-all duration-300 hover:bg-white ${
+                showBackToTop ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10 pointer-events-none'
+              }`}
+            >
+              <ArrowUp size={24} />
+            </button>
+
+            {/* Reservation Modal */}
+            {isModalOpen && (
+              <div className="fixed inset-0 z-[60] flex items-center justify-center p-4">
+                <div className="absolute inset-0 bg-black/80 backdrop-blur-sm" onClick={() => setIsModalOpen(false)}></div>
+                <div className="relative bg-dark-800 p-8 md:p-10 rounded-sm shadow-2xl border border-gold-500/20 w-full max-w-2xl animate-slide-up">
+                  <button 
+                    onClick={() => setIsModalOpen(false)}
+                    className="absolute top-4 right-4 text-gray-400 hover:text-gold-500 transition-colors"
+                  >
+                    <X size={24} />
+                  </button>
+                  
+                  <div className="text-center mb-8">
+                    <span className="text-gold-500 font-serif italic text-lg">Online Reservation</span>
+                    <h2 className="text-3xl font-serif text-white mt-2">Book Your Table</h2>
+                  </div>
+
+                  <form onSubmit={handleReservation} className="space-y-6">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div className="relative group">
+                            <div className="absolute top-3 left-0 text-gold-500">
+                                <User size={18} />
+                            </div>
+                            <input 
+                                type="text"
+                                name="name" 
+                                placeholder="Your Name" 
+                                required
+                                className="w-full bg-transparent text-white pl-8 pr-4 py-3 border-b border-gray-700 focus:border-gold-500 focus:outline-none transition-colors placeholder-gray-500" 
+                            />
+                        </div>
+                        <div className="relative group">
+                            <div className="absolute top-3 left-0 text-gold-500 font-bold text-sm">
+                                <Phone size={18} />
+                            </div>
+                            <input 
+                                type="tel"
+                                name="phone" 
+                                placeholder="Phone Number" 
+                                required
+                                className="w-full bg-transparent text-white pl-8 pr-4 py-3 border-b border-gray-700 focus:border-gold-500 focus:outline-none transition-colors placeholder-gray-500" 
+                            />
+                        </div>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div className="relative group">
+                            <div className="absolute top-3 left-0 text-gold-500 pointer-events-none">
+                                <User size={18} />
+                            </div>
+                             <select 
+                                name="persons" 
+                                className="w-full bg-transparent text-white pl-8 pr-4 py-3 border-b border-gray-700 focus:border-gold-500 focus:outline-none appearance-none cursor-pointer text-gray-400"
+                            >
+                                <option>1 Person</option>
+                                <option>2 Persons</option>
+                                <option>3 Persons</option>
+                                <option>4 Persons</option>
+                                <option>5+ Persons</option>
+                            </select>
+                            <ChevronDown size={14} className="absolute top-4 right-0 text-gray-600 pointer-events-none" />
+                        </div>
+                        <div className="relative group">
+                            <div className="absolute top-3 left-0 text-gold-500 pointer-events-none">
+                                <Calendar size={18} />
+                            </div>
+                            <input 
+                                type="date"
+                                name="date" 
+                                required
+                                className="w-full bg-transparent text-white pl-8 pr-4 py-3 border-b border-gray-700 focus:border-gold-500 focus:outline-none text-gray-400" 
+                            />
+                        </div>
+                        <div className="relative group">
+                            <div className="absolute top-3 left-0 text-gold-500 pointer-events-none">
+                                <Clock size={18} />
+                            </div>
+                            <select name="time" className="w-full bg-transparent text-white pl-8 pr-4 py-3 border-b border-gray-700 focus:border-gold-500 focus:outline-none appearance-none cursor-pointer text-gray-400">
+                                <option>06:00 PM</option>
+                                <option>07:00 PM</option>
+                                <option>08:00 PM</option>
+                                <option>09:00 PM</option>
+                            </select>
+                            <ChevronDown size={14} className="absolute top-4 right-0 text-gray-600 pointer-events-none" />
+                        </div>
+                    </div>
+
+                    <button 
+                        type="submit" 
+                        disabled={isSubmitting}
+                        className="w-full py-4 bg-gold-500 text-dark-900 font-bold uppercase tracking-widest hover:bg-white transition-all duration-300 shadow-lg disabled:opacity-70 disabled:cursor-not-allowed flex justify-center items-center gap-2"
+                    >
+                        {isSubmitting ? <><Loader2 className="animate-spin" size={20} /> Processing...</> : 'Confirm Booking'}
+                    </button>
+                  </form>
+                </div>
+              </div>
+            )}
+
+            {/* Shopping Cart Sidebar */}
+            {isCartOpen && (
+                <div className="fixed inset-0 z-[70] overflow-hidden">
+                    <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={() => setIsCartOpen(false)}></div>
+                    <div className="absolute inset-y-0 right-0 max-w-full flex">
+                        <div className="w-screen max-w-md bg-dark-900 border-l border-gold-500/20 shadow-2xl flex flex-col h-full animate-slide-in-right">
+                            <div className="flex items-center justify-between p-6 border-b border-white/10">
+                                <h2 className="text-xl font-serif text-white flex items-center gap-2">
+                                    <ShoppingBag className="text-gold-500" size={20} /> Your Order
+                                </h2>
+                                <button onClick={() => setIsCartOpen(false)} className="text-gray-400 hover:text-white transition-colors">
+                                    <X size={24} />
+                                </button>
+                            </div>
+
+                            <div className="flex-1 overflow-y-auto p-6 space-y-6">
+                                {cart.length === 0 ? (
+                                    <div className="h-full flex flex-col items-center justify-center text-center text-gray-500 space-y-4">
+                                        <ShoppingBag size={48} className="opacity-20" />
+                                        <p>Your cart is empty.</p>
+                                        <button onClick={() => setIsCartOpen(false)} className="text-gold-500 font-bold uppercase text-xs tracking-widest hover:underline">Browse Menu</button>
+                                    </div>
+                                ) : (
+                                    cart.map((item) => (
+                                        <div key={item.id} className="flex gap-4 bg-dark-800/50 p-3 rounded-sm border border-white/5">
+                                            <div className="w-16 h-16 rounded-sm overflow-hidden shrink-0">
+                                                <img src={item.image} alt={item.name} className="w-full h-full object-cover" />
+                                            </div>
+                                            <div className="flex-1">
+                                                <div className="flex justify-between items-start mb-1">
+                                                    <h3 className="font-serif text-white text-sm">{item.name}</h3>
+                                                    <p className="text-gold-500 font-bold text-sm">${(parseFloat(item.price.replace('$','')) * item.quantity).toFixed(2)}</p>
+                                                </div>
+                                                <div className="flex items-center justify-between mt-2">
+                                                    <div className="flex items-center border border-gray-700 rounded-sm bg-dark-900">
+                                                        <button onClick={() => updateQuantity(item.id, -1)} className="p-1 text-gray-400 hover:text-white hover:bg-gray-800"><Minus size={12} /></button>
+                                                        <span className="px-3 text-xs font-bold text-white">{item.quantity}</span>
+                                                        <button onClick={() => updateQuantity(item.id, 1)} className="p-1 text-gray-400 hover:text-white hover:bg-gray-800"><Plus size={12} /></button>
+                                                    </div>
+                                                    <button onClick={() => updateQuantity(item.id, -item.quantity)} className="text-gray-600 hover:text-red-500 transition-colors"><Trash2 size={14} /></button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    ))
+                                )}
+                            </div>
+
+                            {cart.length > 0 && (
+                                <div className="p-6 border-t border-white/10 bg-dark-800">
+                                    <div className="flex justify-between items-center mb-5">
+                                        <span className="text-gray-400 font-bold text-sm uppercase tracking-wider">Total</span>
+                                        <span className="text-2xl font-serif text-white">${cartTotal.toFixed(2)}</span>
+                                    </div>
+                                    {/* Payment Method */}
+                                    <p className="text-xs text-gray-500 uppercase tracking-widest mb-3">Payment Method</p>
+                                    <div className="grid grid-cols-3 gap-2 mb-5">
+                                      {[
+                                        { id: 'cash', label: 'Cash', icon: '💵' },
+                                        { id: 'card', label: 'Card', icon: '💳' },
+                                        { id: 'momo', label: 'MoMo', icon: '📱' },
+                                      ].map(pm => (
+                                        <button
+                                          key={pm.id}
+                                          onClick={() => setPaymentMethod(pm.id)}
+                                          className={`py-2 px-1 text-xs font-bold uppercase tracking-wider border transition-all flex flex-col items-center gap-1 ${paymentMethod === pm.id ? 'border-gold-500 bg-gold-500/10 text-gold-500' : 'border-gray-700 text-gray-500 hover:border-gray-500'}`}
+                                        >
+                                          <span className="text-base">{pm.icon}</span>
+                                          {pm.label}
+                                        </button>
+                                      ))}
+                                    </div>
+                                    {paymentMethod === 'momo' && (
+                                      <input
+                                        type="tel"
+                                        placeholder="MoMo phone (+250...)"
+                                        value={momoPhone}
+                                        onChange={e => setMomoPhone(e.target.value)}
+                                        className="w-full mb-4 bg-transparent text-white px-3 py-2 border border-gray-700 focus:border-gold-500 focus:outline-none text-sm placeholder-gray-600"
+                                      />
+                                    )}
+                                    <button
+                                        onClick={handleCheckout}
+                                        disabled={isSubmitting}
+                                        className="w-full py-4 bg-gold-500 text-dark-900 font-bold uppercase tracking-widest hover:bg-white transition-all duration-300 shadow-lg disabled:opacity-70 disabled:cursor-not-allowed flex justify-center items-center gap-2"
+                                    >
+                                        {isSubmitting ? <><Loader2 className="animate-spin" size={20} /> Processing...</> : `Pay with ${paymentMethod === 'cash' ? 'Cash' : paymentMethod === 'card' ? 'Card' : 'MoMo'}`}
+                                    </button>
+                                </div>
+                            )}
+                        </div>
+                    </div>
+                </div>
+            )}
+            {/* ── Login / Register Modal ─────────────────────── */}
+            {isAuthOpen && (
+              <div className="fixed inset-0 z-[80] flex items-center justify-center p-4">
+                <div className="absolute inset-0 bg-black/80 backdrop-blur-sm" onClick={() => setIsAuthOpen(false)}></div>
+                <div className="relative bg-dark-800 p-8 rounded-sm shadow-2xl border border-gold-500/20 w-full max-w-md animate-slide-up">
+                  <button onClick={() => setIsAuthOpen(false)} className="absolute top-4 right-4 text-gray-400 hover:text-gold-500 transition-colors"><X size={22} /></button>
+                  <div className="text-center mb-6">
+                    <div className="w-12 h-12 rounded-full bg-gold-500/10 border border-gold-500/30 flex items-center justify-center mx-auto mb-4">
+                      <User className="text-gold-500" size={22} />
+                    </div>
+                    <h2 className="text-2xl font-serif text-white">
+                      {authTab === 'login' ? 'Welcome Back' : 'Create Account'}
+                    </h2>
+                  </div>
+
+                  {/* Tabs */}
+                  <div className="flex mb-6 border border-gray-700 rounded-sm overflow-hidden">
+                    {['login', 'register'].map(tab => (
+                      <button key={tab} onClick={() => setAuthTab(tab)}
+                        className={`flex-1 py-2 text-xs font-bold uppercase tracking-widest transition-all ${authTab === tab ? 'bg-gold-500 text-dark-900' : 'text-gray-400 hover:text-white'}`}>
+                        {tab === 'login' ? 'Sign In' : 'Sign Up'}
+                      </button>
+                    ))}
+                  </div>
+
+                  <form onSubmit={handleAuthSubmit} className="space-y-4">
+                    {authTab === 'register' && (
+                      <input name="name" type="text" placeholder="Full Name" required
+                        className="w-full bg-dark-900 text-white px-4 py-3 border border-gray-700 focus:border-gold-500 focus:outline-none placeholder-gray-600 text-sm" />
+                    )}
+                    <input name="email" type="email" placeholder="Email Address" required
+                      className="w-full bg-dark-900 text-white px-4 py-3 border border-gray-700 focus:border-gold-500 focus:outline-none placeholder-gray-600 text-sm" />
+                    <input name="password" type="password" placeholder="Password" required
+                      className="w-full bg-dark-900 text-white px-4 py-3 border border-gray-700 focus:border-gold-500 focus:outline-none placeholder-gray-600 text-sm" />
+                    {authTab === 'register' && (
+                      <input name="phone" type="tel" placeholder="Phone Number (optional)"
+                        className="w-full bg-dark-900 text-white px-4 py-3 border border-gray-700 focus:border-gold-500 focus:outline-none placeholder-gray-600 text-sm" />
+                    )}
+                    <button type="submit" disabled={authLoading}
+                      className="w-full py-3 bg-gold-500 text-dark-900 font-bold uppercase tracking-widest hover:bg-white transition-all disabled:opacity-70 disabled:cursor-not-allowed flex justify-center items-center gap-2 text-sm">
+                      {authLoading ? <><Loader2 className="animate-spin" size={18} /> {authTab === 'login' ? 'Signing In...' : 'Creating Account...'}</> : (authTab === 'login' ? 'Sign In' : 'Create Account')}
+                    </button>
+                  </form>
+
+                  <p className="text-center text-gray-500 text-xs mt-5">
+                    {authTab === 'login' ? "Don't have an account? " : "Already have an account? "}
+                    <button onClick={() => setAuthTab(authTab === 'login' ? 'register' : 'login')} className="text-gold-500 hover:underline font-bold">
+                      {authTab === 'login' ? 'Sign Up' : 'Sign In'}
+                    </button>
+                  </p>
+                </div>
+              </div>
+            )}
+
+            {/* ── Admin Dashboard ────────────────────────────── */}
+            {isAdminOpen && authUser?.role === 'admin' && (
+              <div className="fixed inset-0 z-[90] bg-dark-900/98 backdrop-blur-sm overflow-y-auto">
+                <div className="max-w-6xl mx-auto p-6">
+                  {/* Header */}
+                  <div className="flex items-center justify-between mb-8 border-b border-gold-500/20 pb-6">
+                    <div className="flex items-center gap-3">
+                      <Shield className="text-gold-500" size={28} />
+                      <div>
+                        <h1 className="text-2xl font-serif text-white">Admin Dashboard</h1>
+                        <p className="text-gray-500 text-sm">Cafe Acacia Management Panel</p>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-3">
+                      <button onClick={loadAdminData} disabled={adminLoading} className="text-gray-400 hover:text-gold-500 transition-colors" title="Refresh">
+                        <RefreshCw size={18} className={adminLoading ? 'animate-spin' : ''} />
+                      </button>
+                      <button onClick={() => setIsAdminOpen(false)} className="text-gray-400 hover:text-white transition-colors">
+                        <X size={24} />
+                      </button>
+                    </div>
+                  </div>
+
+                  {/* Stats */}
+                  <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+                    {[
+                      { label: 'Total Bookings', value: adminBookings.length, color: 'text-blue-400' },
+                      { label: 'Pending', value: adminBookings.filter(b => b.status === 'pending').length, color: 'text-yellow-400' },
+                      { label: 'Total Orders', value: adminOrders.length, color: 'text-purple-400' },
+                      { label: 'Revenue', value: `$${adminOrders.reduce((s,o) => s + (o.total || 0), 0).toFixed(2)}`, color: 'text-gold-500' },
+                    ].map((stat, i) => (
+                      <div key={i} className="bg-dark-800 border border-white/5 p-4 rounded-sm">
+                        <p className="text-gray-500 text-xs uppercase tracking-widest mb-1">{stat.label}</p>
+                        <p className={`text-2xl font-serif font-bold ${stat.color}`}>{stat.value}</p>
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* Tabs */}
+                  <div className="flex gap-2 mb-6">
+                    {['bookings', 'orders'].map(tab => (
+                      <button key={tab} onClick={() => setAdminTab(tab)}
+                        className={`px-6 py-2 text-xs font-bold uppercase tracking-widest border transition-all ${adminTab === tab ? 'border-gold-500 bg-gold-500/10 text-gold-500' : 'border-gray-700 text-gray-400 hover:text-white'}`}>
+                        {tab === 'bookings' ? `Reservations (${adminBookings.length})` : `Orders (${adminOrders.length})`}
+                      </button>
+                    ))}
+                  </div>
+
+                  {adminLoading ? (
+                    <div className="flex justify-center py-20">
+                      <Loader2 className="animate-spin text-gold-500" size={36} />
+                    </div>
+                  ) : adminTab === 'bookings' ? (
+                    <div className="space-y-3">
+                      {adminBookings.length === 0 ? (
+                        <p className="text-center text-gray-500 py-16">No reservations yet.</p>
+                      ) : adminBookings.map(b => (
+                        <div key={b._id} className="bg-dark-800 border border-white/5 p-4 rounded-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
+                          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 flex-1 text-sm">
+                            <div><p className="text-gray-500 text-xs mb-0.5">Guest</p><p className="text-white font-medium">{b.name}</p></div>
+                            <div><p className="text-gray-500 text-xs mb-0.5">Date & Time</p><p className="text-white">{b.date} · {b.time}</p></div>
+                            <div><p className="text-gray-500 text-xs mb-0.5">Guests / Type</p><p className="text-white">{b.persons} · {b.bookingType}</p></div>
+                            <div><p className="text-gray-500 text-xs mb-0.5">Phone</p><p className="text-white">{b.phone}</p></div>
+                          </div>
+                          <div className="flex items-center gap-3">
+                            <span className={`text-xs font-bold uppercase px-3 py-1 rounded-full ${
+                              b.status === 'confirmed' ? 'bg-green-500/10 text-green-400 border border-green-500/20' :
+                              b.status === 'cancelled' ? 'bg-red-500/10 text-red-400 border border-red-500/20' :
+                              'bg-yellow-500/10 text-yellow-400 border border-yellow-500/20'
+                            }`}>{b.status}</span>
+                            {b.status === 'pending' && (
+                              <>
+                                <button onClick={() => handleBookingStatus(b._id, 'confirmed')} className="p-1.5 rounded-full bg-green-500/10 text-green-400 hover:bg-green-500/20 transition-colors" title="Confirm"><CheckCircle size={18} /></button>
+                                <button onClick={() => handleBookingStatus(b._id, 'cancelled')} className="p-1.5 rounded-full bg-red-500/10 text-red-400 hover:bg-red-500/20 transition-colors" title="Cancel"><XCircle size={18} /></button>
+                              </>
+                            )}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  ) : (
+                    <div className="space-y-3">
+                      {adminOrders.length === 0 ? (
+                        <p className="text-center text-gray-500 py-16">No orders yet.</p>
+                      ) : adminOrders.map(o => (
+                        <div key={o._id} className="bg-dark-800 border border-white/5 p-4 rounded-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
+                          <div className="flex-1">
+                            <div className="flex items-center gap-3 mb-2">
+                              <p className="text-white font-medium">{o.customerName}</p>
+                              <span className="text-gray-500 text-xs">{o.paymentMethod?.toUpperCase()}</span>
+                            </div>
+                            <p className="text-gray-400 text-sm">{(o.items || []).map(i => `${i.name} x${i.quantity}`).join(' · ')}</p>
+                          </div>
+                          <div className="flex items-center gap-4">
+                            <span className="text-gold-500 font-bold font-serif">${(o.total || 0).toFixed(2)}</span>
+                            <select
+                              value={o.status}
+                              onChange={ev => handleOrderStatus(o._id, ev.target.value)}
+                              className="bg-dark-900 text-white text-xs border border-gray-700 px-3 py-1.5 focus:border-gold-500 focus:outline-none cursor-pointer"
+                            >
+                              {['preparing', 'ready', 'delivered', 'cancelled'].map(s => (
+                                <option key={s} value={s}>{s.charAt(0).toUpperCase() + s.slice(1)}</option>
+                              ))}
+                            </select>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              </div>
+            )}
+
+            {/* Toast Notifications */}
+            <div className="toast-container">
+              {toasts.map(t => (
+                <div key={t.id} className={`toast toast-${t.type}`}>
+                  <span style={{fontSize:'18px'}}>
+                    {t.type === 'success' && '✓'}
+                    {t.type === 'error'   && '✗'}
+                    {t.type === 'info'    && '＋'}
+                  </span>
+                  <span>{t.message}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        );
+      };
+
+      const root = createRoot(document.getElementById('root'));
+      root.render(<App />);
+    </script>
+  </body>
+</html>
