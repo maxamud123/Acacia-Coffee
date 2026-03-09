@@ -226,7 +226,7 @@
       .menu-card:hover .menu-card-overlay { opacity: 1; }
       .menu-card-badge {
         position: absolute; top: 12px; left: 12px;
-        background: rgba(14,16,19,0.85); backdrop-filter: blur(8px);
+        background: rgba(14,16,19,0.85); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
         color: #d1a054; font-size: 9px; font-weight: 700;
         letter-spacing: 0.15em; text-transform: uppercase;
         padding: 4px 10px; border: 1px solid rgba(209,160,84,0.3);
@@ -249,6 +249,7 @@
       /* Glassmorphism for modals */
       .glass-card {
         background: rgba(22,25,29,0.92);
+        -webkit-backdrop-filter: blur(20px);
         backdrop-filter: blur(20px);
         border: 1px solid rgba(209,160,84,0.15);
         box-shadow: 0 25px 80px rgba(0,0,0,0.6);
@@ -313,6 +314,7 @@
       .line-clamp-2 {
         display: -webkit-box;
         -webkit-line-clamp: 2;
+        line-clamp: 2;
         -webkit-box-orient: vertical;
         overflow: hidden;
       }
