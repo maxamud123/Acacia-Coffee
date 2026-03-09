@@ -479,7 +479,7 @@
       // Backend API Service — auto-switches between local and production
       const API_URL = (window.location.hostname === 'localhost' || window.location.protocol === 'file:')
         ? 'http://localhost:5000/api'
-        : 'https://YOUR_RAILWAY_URL.up.railway.app/api';
+        : 'https://acacia-coffee-production.up.railway.app/api';
 
       const Backend = {
         async createReservation(data) {
@@ -630,7 +630,7 @@
 
         // Check backend connection on load
         React.useEffect(() => {
-          fetch('http://localhost:5000/api/health')
+          fetch(`${API_URL}/health`)
             .then(r => r.ok ? setApiStatus('online') : setApiStatus('offline'))
             .catch(() => setApiStatus('offline'));
         }, []);
