@@ -333,6 +333,7 @@
       }
       body { animation: pageFadeIn 0.6s ease forwards; }
     </style>
+  <script src="https://js.stripe.com/v3/"></script>
   <script type="importmap">
 {
   "imports": {
@@ -481,6 +482,14 @@
         ? 'http://localhost:5000/api'
         : 'https://acacia-coffee-production.up.railway.app/api';
 
+      const STRIPE_PK = 'pk_test_51T982N4vrHFGKUnMtuceqVS12jwMaG2aABYDzdcriclfBRB5vRIbwLeuoAw3BrqwQFMgKETk4tmXHKao2JBJcUII00jjRdKugp';
+      let _stripe = null;
+      let _cardElement = null;
+      const getStripe = () => {
+        if (!_stripe && window.Stripe) _stripe = window.Stripe(STRIPE_PK);
+        return _stripe;
+      };
+
       const Backend = {
         async createReservation(data) {
           const res = await fetch(`${API_URL}/reservations`, {
@@ -605,6 +614,8 @@
         const [apiStatus, setApiStatus] = React.useState('checking');
         const [paymentMethod, setPaymentMethod] = React.useState('cash');
         const [momoPhone, setMomoPhone] = React.useState('');
+        const [stripeError, setStripeError] = React.useState('');
+        const stripeCardMounted = React.useRef(false);
 
         // Auth state
         const [authToken, setAuthToken] = React.useState(() => localStorage.getItem('cafe_token'));
@@ -634,6 +645,36 @@
             .then(r => r.ok ? setApiStatus('online') : setApiStatus('offline'))
             .catch(() => setApiStatus('offline'));
         }, []);
+
+        // Mount Stripe card element when card payment is selected
+        React.useEffect(() => {
+          if (paymentMethod === 'card' && isCartOpen) {
+            setTimeout(() => {
+              const el = document.getElementById('stripe-card-element');
+              if (el && !stripeCardMounted.current) {
+                const stripe = getStripe();
+                if (!stripe) return;
+                const elements = stripe.elements();
+                _cardElement = elements.create('card', {
+                  style: {
+                    base: { color: '#fff', fontSize: '14px', fontFamily: 'inherit', '::placeholder': { color: '#6b7280' } },
+                    invalid: { color: '#ef4444' },
+                  },
+                });
+                _cardElement.mount('#stripe-card-element');
+                _cardElement.on('change', e => setStripeError(e.error ? e.error.message : ''));
+                stripeCardMounted.current = true;
+              }
+            }, 150);
+          } else {
+            if (_cardElement && stripeCardMounted.current) {
+              _cardElement.unmount();
+              _cardElement = null;
+              stripeCardMounted.current = false;
+              setStripeError('');
+            }
+          }
+        }, [paymentMethod, isCartOpen]);
 
         // Scroll reveal
         React.useEffect(() => {
@@ -727,20 +768,44 @@
         const handleCheckout = async () => {
             setIsSubmitting(true);
             try {
-              const orderData = {
-                items: cart,
-                total: cartTotal,
-                customerName: authUser?.name || 'Guest',
-                customerEmail: authUser?.email,
-                paymentMethod,
-              };
-              await Backend.placeOrder(orderData);
+              if (paymentMethod === 'card') {
+                // Stripe card payment
+                const res = await fetch(`${API_URL}/payment/create-intent`, {
+                  method: 'POST',
+                  headers: { 'Content-Type': 'application/json' },
+                  body: JSON.stringify({ amount: Math.round(cartTotal * 100), currency: 'usd' }),
+                });
+                const intentData = await res.json();
+                if (!intentData.clientSecret) throw new Error('Payment setup failed');
+
+                const stripe = getStripe();
+                const { error, paymentIntent } = await stripe.confirmCardPayment(intentData.clientSecret, {
+                  payment_method: { card: _cardElement },
+                });
+                if (error) { showToast(error.message, 'error'); setIsSubmitting(false); return; }
+
+                await Backend.placeOrder({
+                  items: cart, total: cartTotal,
+                  customerName: authUser?.name || 'Guest',
+                  customerEmail: authUser?.email,
+                  paymentMethod: 'card',
+                  paymentStatus: 'paid',
+                  paymentId: paymentIntent.id,
+                });
+              } else {
+                await Backend.placeOrder({
+                  items: cart, total: cartTotal,
+                  customerName: authUser?.name || 'Guest',
+                  customerEmail: authUser?.email,
+                  paymentMethod,
+                });
+              }
               setCart([]);
               setIsCartOpen(false);
               setPaymentMethod('cash');
               showToast('Order placed! Our kitchen is preparing your meal.', 'success');
             } catch (err) {
-              showToast('Could not place order. Please make sure the backend is running.', 'error');
+              showToast(err.message || 'Could not place order. Please try again.', 'error');
             } finally {
               setIsSubmitting(false);
             }
@@ -1477,6 +1542,13 @@
                                         </button>
                                       ))}
                                     </div>
+                                    {paymentMethod === 'card' && (
+                                      <div className="mb-4">
+                                        <div id="stripe-card-element" className="p-3 border border-gray-700 bg-dark-900 rounded-sm min-h-[42px]"></div>
+                                        {stripeError && <p className="text-red-400 text-xs mt-1">{stripeError}</p>}
+                                        <p className="text-gray-600 text-xs mt-1">Test card: 4242 4242 4242 4242 · Any future date · Any CVC</p>
+                                      </div>
+                                    )}
                                     {paymentMethod === 'momo' && (
                                       <input
                                         type="tel"
