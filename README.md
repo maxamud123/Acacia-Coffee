@@ -37,3 +37,16 @@ npm install
 
 # Start the development server
 npm run dev
+Open http://localhost:5173 in your browser.
+
+Build for Production
+
+npm run build
+Author
+Mohamoud Abukar
+
+LinkedIn · GitHub
+
+Built with passion for great coffee and clean code.
+
+
