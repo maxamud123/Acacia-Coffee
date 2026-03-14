@@ -1,11 +1,11 @@
 import { MenuItem, ServiceItem } from './types';
 
 export const NAV_LINKS = [
-  { name: 'Home', href: '#home' },
-  { name: 'Menu', href: '#menu' },
-  { name: 'About Us', href: '#about' },
-  { name: 'Book a Tour', href: '#experience' },
-  { name: 'Shop Now', href: '#experience' },
+  { name: 'Cafe', href: '#menu' },
+  { name: 'Food', href: '#menu' },
+  { name: 'About', href: '#about' },
+  { name: 'Gallery', href: '#gallery' },
+  { name: 'Reserve Table', href: '#reservation' },
 ];
 
 export const SERVICES: ServiceItem[] = [

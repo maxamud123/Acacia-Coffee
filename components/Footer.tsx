@@ -23,7 +23,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenAdmin }) => {
   };
 
   return (
-    <footer id="footer" className="bg-dark-900 pt-24 border-t border-gray-800 relative overflow-hidden">
+    <footer id="footer" className="bg-navy-900 pt-24 border-t border-navy-700 relative overflow-hidden">
       
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-[0.02]" style={{ backgroundImage: "url('https://www.transparenttextures.com/patterns/cubes.png')" }}></div>

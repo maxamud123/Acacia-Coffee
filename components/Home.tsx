@@ -45,15 +45,15 @@ export const Home: React.FC = () => {
 
   if (loading) {
     return (
-      <div className="fixed inset-0 z-[60] bg-dark-900 flex flex-col items-center justify-center transition-opacity duration-700">
+      <div className="fixed inset-0 z-[60] bg-white flex flex-col items-center justify-center transition-opacity duration-700">
         <div className="relative mb-6">
           <div className="absolute inset-0 bg-gold-500 blur-xl opacity-20 rounded-full animate-pulse"></div>
-          <div className="bg-dark-800 p-4 rounded-full border border-gold-500/30 relative z-10 text-gold-500">
+          <div className="bg-cream-100 p-4 rounded-full border border-gold-500/30 relative z-10 text-gold-500">
              <Logo className="w-16 h-16 animate-pulse" />
           </div>
         </div>
         <div className="text-center">
-          <h1 className="text-3xl font-serif text-white tracking-widest font-bold mb-2">CAFE ACACIA</h1>
+          <h1 className="text-3xl font-serif text-gray-900 tracking-widest font-bold mb-2">CAFE ACACIA</h1>
           <p className="text-gold-500 text-xs tracking-[0.4em] uppercase">Kigali • Rwanda</p>
         </div>
         <div className="mt-8 w-48 h-[1px] bg-dark-700 relative overflow-hidden">
@@ -65,7 +65,6 @@ export const Home: React.FC = () => {
 
   return (
     <div className="relative min-h-screen flex flex-col font-sans animate-slide-up">
-      <Topbar />
       <Navbar />
       
       <main className="flex-grow">
@@ -81,10 +80,21 @@ export const Home: React.FC = () => {
       
       <AdminDashboard isOpen={showAdmin} onClose={() => setShowAdmin(false)} />
 
+      {/* Kivu Noir style "New Items" floating pill */}
+      <a
+        href="#menu"
+        onClick={(e) => { e.preventDefault(); document.getElementById('menu')?.scrollIntoView({ behavior: 'smooth' }); }}
+        className="fixed bottom-8 right-8 z-50 flex items-center gap-2 px-5 py-3 bg-gold-500 text-white rounded-full shadow-xl hover:bg-gold-600 transition-all duration-300 hover:-translate-y-1 text-sm font-medium tracking-wide"
+        style={{ boxShadow: '0 8px 32px rgba(201,168,124,0.4)' }}
+      >
+        <span>🔔</span>
+        New Items
+      </a>
+
       {/* Scroll to top button */}
       <button
         onClick={scrollToTop}
-        className={`fixed bottom-8 right-8 z-50 p-3 bg-gold-500 text-dark-900 rounded-full shadow-lg transition-all duration-300 hover:bg-white hover:-translate-y-1 ${
+        className={`fixed bottom-8 left-8 z-50 p-3 bg-navy-800 text-white rounded-full shadow-lg transition-all duration-300 hover:bg-navy-900 hover:-translate-y-1 ${
           showScrollTop ? 'opacity-100 visible' : 'opacity-0 invisible'
         }`}
         aria-label="Scroll to top"

@@ -10,51 +10,47 @@ const GALLERY_IMAGES = [
 ];
 
 const GalleryImage: React.FC<{ image: typeof GALLERY_IMAGES[0] }> = ({ image }) => {
-    const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
 
-    return (
-        <div className="group relative overflow-hidden rounded-sm cursor-pointer border border-white/5 bg-dark-700 h-72">
-             {isLoading && (
-                <div className="absolute inset-0 flex items-center justify-center bg-dark-800 z-0">
-                    <div className="w-full h-full absolute inset-0 bg-dark-700 animate-pulse"></div>
-                    <div className="relative z-10 w-8 h-8 border-2 border-gold-500/30 border-t-gold-500 rounded-full animate-spin"></div>
-                </div>
-            )}
-            
-            <div className="absolute inset-0 bg-gold-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10"></div>
-            
-            <img 
-                src={image.src} 
-                alt={image.alt}
-                loading="lazy"
-                decoding="async"
-                onLoad={() => setIsLoading(false)}
-                className={`w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700 ease-out ${isLoading ? 'opacity-0' : 'opacity-100'}`}
-            />
-            
-            <div className="absolute bottom-0 left-0 w-full p-6 translate-y-full group-hover:translate-y-0 transition-transform duration-500 z-20">
-                <div className="w-10 h-1 bg-gold-500 mb-2"></div>
-                <p className="text-white font-serif tracking-widest uppercase text-sm">{image.alt}</p>
-            </div>
-        </div>
-    );
+  return (
+    <div className="group relative overflow-hidden cursor-pointer bg-gray-100 h-64 rounded-sm">
+      {isLoading && (
+        <div className="absolute inset-0 bg-gray-100 animate-pulse" />
+      )}
+
+      <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-500 z-10" />
+
+      <img
+        src={image.src}
+        alt={image.alt}
+        loading="lazy"
+        onLoad={() => setIsLoading(false)}
+        className={`w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 ease-out ${isLoading ? 'opacity-0' : 'opacity-100'}`}
+      />
+
+      <div className="absolute bottom-0 left-0 w-full p-5 translate-y-full group-hover:translate-y-0 transition-transform duration-400 z-20">
+        <div className="w-8 h-0.5 bg-gold-500 mb-2" />
+        <p className="text-white font-sans tracking-widest uppercase text-xs font-medium">{image.alt}</p>
+      </div>
+    </div>
+  );
 };
 
 export const Gallery: React.FC = () => {
   return (
-    <section id="gallery" className="py-24 bg-dark-800">
-      <div className="container mx-auto px-4">
-        
-        <div className="text-center mb-16">
-            <p className="text-gold-500 font-serif italic text-xl mb-2">Photos</p>
-            <div className="separator"><div className="separator-icon"></div></div>
-            <h2 className="text-4xl md:text-5xl font-serif text-white">Our Gallery</h2>
+    <section id="gallery" className="py-24 bg-white">
+      <div className="container mx-auto px-6 md:px-10">
+
+        <div className="text-center mb-14">
+          <p className="text-gold-500 text-[10px] tracking-[0.5em] uppercase mb-4 font-medium">Photos</p>
+          <h2 className="text-3xl md:text-4xl font-serif text-gray-900 font-bold tracking-wide mb-5">Our Gallery</h2>
+          <div className="w-10 h-px bg-gold-500/50 mx-auto" />
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {GALLERY_IMAGES.map((image) => (
-                <GalleryImage key={image.id} image={image} />
-            ))}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+          {GALLERY_IMAGES.map((image) => (
+            <GalleryImage key={image.id} image={image} />
+          ))}
         </div>
 
       </div>
