@@ -385,7 +385,7 @@
 }
 </script>
 </head>
-  <body class="bg-dark-900 text-gray-300 antialiased selection:bg-gold-500 selection:text-white">
+  <body class="bg-white text-gray-900 antialiased selection:bg-gold-500 selection:text-white">
     <div id="root"></div>
     <script type="text/babel" data-type="module">
       import React from 'react';
@@ -808,38 +808,36 @@
               </div>
             </nav>
 
-            {/* Hero Section */}
-            <section id="home" className="relative h-screen flex items-center justify-center bg-dark-900 overflow-hidden">
+            {/* Hero Section — Kivu Noir style: full image with dark overlay */}
+            <section id="home" className="relative h-screen flex items-center justify-center overflow-hidden" style={{paddingTop:'73px'}}>
               {HERO_SLIDES.map((slide, index) => (
-                <div 
+                <div
                   key={index}
-                  className={`absolute inset-0 bg-cover bg-center transition-opacity duration-1000 ${index === currentSlide ? 'opacity-40' : 'opacity-0'}`}
+                  className={`absolute inset-0 bg-cover bg-center transition-opacity duration-1000 ${index === currentSlide ? 'opacity-100' : 'opacity-0'}`}
                   style={{ backgroundImage: `url('${slide}')` }}
                 ></div>
               ))}
-              <div className="absolute inset-0 bg-gradient-to-t from-dark-900 via-dark-900/50 to-transparent"></div>
-              
-              <div className="relative z-10 text-center px-4 max-w-4xl mx-auto animate-fade-in">
-                <div className="separator mb-6">
-                  <span className="separator-icon"></span>
-                  <span className="text-gold-500 uppercase tracking-[0.2em] text-sm">The Art of Dining</span>
-                  <span className="separator-icon"></span>
-                </div>
-                <h1 className="font-serif text-5xl md:text-7xl lg:text-8xl text-white mb-8 leading-tight">
-                  The Pure Taste of <br/>
-                  <span className="text-gold-500">Acacia</span>
+              <div className="absolute inset-0" style={{backgroundColor:'rgba(10,8,6,0.72)'}}></div>
+              <div className="absolute bottom-0 left-0 right-0 h-32" style={{background:'linear-gradient(to top, #ffffff, transparent)'}}></div>
+
+              <div className="relative z-10 text-center px-4 max-w-4xl mx-auto">
+                <p className="text-gold-500 text-[10px] tracking-[0.5em] uppercase mb-10 font-medium">Kigali · Rwanda</p>
+                <h1 className="font-serif text-6xl md:text-8xl text-white font-bold tracking-[0.12em] leading-none mb-8">
+                  CAFE<br/>ACACIA
                 </h1>
-                <p className="text-gray-400 text-lg md:text-xl max-w-2xl mx-auto mb-10 font-light leading-relaxed">
-                  Experience a culinary journey where tradition meets innovation. 
-                  Every dish tells a story of flavor, passion, and excellence.
-                </p>
+                <div className="flex items-center justify-center gap-5 mb-8">
+                  <div className="w-14 h-px bg-gold-500 opacity-60"></div>
+                  <span className="text-gold-500 text-[9px] tracking-[0.5em] uppercase font-medium">Est. 1995</span>
+                  <div className="w-14 h-px bg-gold-500 opacity-60"></div>
+                </div>
+                <p className="text-white/60 text-sm max-w-xs mx-auto mb-12 leading-relaxed">Where every flavor tells a story.</p>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                  <a href="#menu" className="btn-gold px-8 py-4 inline-block text-sm tracking-widest">
+                  <a href="#menu" className="px-10 py-4 bg-gold-500 text-white font-semibold uppercase text-[10px] tracking-[0.3em] hover:bg-white hover:text-gray-900 transition-all duration-300">
                     View Menu
                   </a>
                   <button
                     onClick={() => setIsModalOpen(true)}
-                    className="border border-gold-500 text-gold-500 px-8 py-4 uppercase tracking-widest font-bold text-sm hover:bg-gold-500 hover:text-dark-900 transition-all duration-300 hover:shadow-[0_8px_25px_rgba(209,160,84,0.3)]"
+                    className="px-10 py-4 border border-white/30 text-white/80 font-semibold uppercase text-[10px] tracking-[0.3em] hover:border-gold-500 hover:text-gold-500 transition-all duration-300"
                   >
                     Book a Table
                   </button>
@@ -848,46 +846,26 @@
             </section>
 
             {/* Features */}
-            <section className="py-20 bg-dark-800 relative">
-              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <section className="py-20 bg-white border-b border-gray-100">
+              <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                   {[
-                    { icon: Clock, title: "Opening Hours", text: "Mon-Sun: 09:00 AM - 10:00 PM" },
+                    { icon: Clock, title: "Opening Hours", text: "Mon-Sun: 07:00 AM - 10:00 PM" },
                     { icon: MapPin, title: "Location", text: "Kisiment Kg 201 Rukiri 2, Kigali" },
                     { icon: Phone, title: "Reservations", text: "+250 787 217 72" }
                   ].map((feature, idx) => (
-                    <div key={idx} className={`reveal bg-dark-700 p-8 text-center border border-white/5 hover:border-gold-500/30 transition-all duration-300 group`} style={{transitionDelay:`${idx*0.12}s`}}>
+                    <div key={idx} className="reveal p-8 text-center border border-gray-100 hover:border-gold-500/30 transition-all duration-300 group bg-white" style={{transitionDelay:`${idx*0.12}s`}}>
                       <div className="w-16 h-16 rounded-full bg-gold-500/10 border border-gold-500/20 flex items-center justify-center mx-auto mb-6 group-hover:bg-gold-500/20 transition-colors">
                         <feature.icon className="w-7 h-7 text-gold-500 group-hover:scale-110 transition-transform duration-300" />
                       </div>
-                      <h3 className="font-serif text-xl text-white mb-3">{feature.title}</h3>
-                      <p className="text-gray-400 text-sm font-sans">{feature.text}</p>
+                      <h3 className="font-serif text-xl text-gray-900 mb-3">{feature.title}</h3>
+                      <p className="text-gray-500 text-sm font-sans">{feature.text}</p>
                     </div>
                   ))}
                 </div>
               </div>
             </section>
 
-            {/* Stats */}
-            <section className="py-16 bg-dark-900">
-              <div className="section-divider mb-16"></div>
-              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                  {[
-                    { number: '12+', label: 'Years of Excellence' },
-                    { number: '50+', label: 'Signature Dishes' },
-                    { number: '10K+', label: 'Happy Guests' },
-                    { number: '8', label: 'Award Winning Chef' },
-                  ].map((stat, i) => (
-                    <div key={i} className="stat-card reveal" style={{transitionDelay:`${i*0.1}s`}}>
-                      <p className="gradient-text font-serif text-4xl md:text-5xl font-bold mb-2">{stat.number}</p>
-                      <p className="text-gray-500 text-xs uppercase tracking-widest">{stat.label}</p>
-                    </div>
-                  ))}
-                </div>
-              </div>
-              <div className="section-divider mt-16"></div>
-            </section>
 
             {/* Menu Section — Kivu Noir style */}
             <section id="menu" className="bg-white">
@@ -966,29 +944,30 @@
             </section>
 
             {/* About Us Section */}
-            <section id="about" className="py-24 bg-dark-900 relative overflow-hidden">
-              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <section id="about" className="py-24 bg-white relative overflow-hidden">
+              <div className="max-w-5xl mx-auto px-6 md:px-10 relative z-10">
                 <div className="flex flex-col lg:flex-row items-center gap-16">
                   <div className="lg:w-1/2 reveal-left">
                     <div className="relative">
                       <div className="absolute -top-4 -left-4 w-24 h-24 border-t-2 border-l-2 border-gold-500/50"></div>
-                      <img src="https://images.unsplash.com/photo-1577219491135-ce391730fb2c?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Chef" className="w-full h-auto rounded-sm shadow-2xl relative z-10 grayscale hover:grayscale-0 transition-all duration-700" />
+                      <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=800&q=80" alt="Coffee" className="w-full h-auto rounded-sm shadow-lg relative z-10" />
                       <div className="absolute -bottom-4 -right-4 w-24 h-24 border-b-2 border-r-2 border-gold-500/50"></div>
                     </div>
                   </div>
                   <div className="lg:w-1/2 text-center lg:text-left reveal-right">
-                    <span className="text-gold-500 font-serif italic text-xl">Our Story</span>
-                    <h2 className="text-4xl md:text-5xl font-serif text-white mt-2 mb-6">The Chef's Kitchen</h2>
-                    <p className="text-gray-400 mb-8 leading-relaxed text-lg">
-                      At Cafe Acacia, we believe that food is more than just sustenance—it is a language of love, heritage, and creativity. Our journey began with a simple passion for authentic flavors and has grown into a culinary destination.
+                    <p className="text-gold-500 text-[10px] tracking-[0.5em] uppercase mb-3 font-medium">Our Story</p>
+                    <h2 className="text-3xl md:text-4xl font-serif text-gray-900 font-bold mb-4 tracking-wide">Every Flavor Tells a Story</h2>
+                    <div className="w-10 h-px bg-gold-500 mb-8 lg:mx-0 mx-auto"></div>
+                    <p className="text-gray-500 mb-8 leading-relaxed">
+                      Founded in 1995, Cafe Acacia started as a humble family kitchen. Today, it stands as a destination for specialty coffee and fine dining, where traditional recipes meet modern innovation.
                     </p>
-                    <blockquote className="relative border-l-4 border-gold-500 pl-6 italic text-gray-300 text-xl mb-8">
-                      "Cooking is an art, but all art requires knowing something about the techniques and materials. We strive to bring the soul of the ingredients to your plate."
+                    <blockquote className="relative border-l-2 border-gold-500/60 pl-6 italic text-gray-600 text-lg mb-8">
+                      "Cooking is an art, but all art requires knowing something about the techniques and materials."
                     </blockquote>
                     <div className="flex items-center justify-center lg:justify-start gap-4">
-                       <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Head Chef" className="w-12 h-12 rounded-full border border-gold-500" />
+                       <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Head Chef" className="w-12 h-12 rounded-full border border-gold-500/40" />
                        <div>
-                         <p className="text-white font-serif text-lg">Antoine R.</p>
+                         <p className="text-gray-900 font-serif text-lg">Antoine R.</p>
                          <p className="text-gold-500 text-xs uppercase tracking-widest">Head Chef</p>
                        </div>
                     </div>
@@ -998,28 +977,28 @@
             </section>
 
             {/* Testimonials */}
-            <section className="py-24 bg-dark-800">
-              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <section className="py-24 bg-white border-t border-gray-100">
+              <div className="max-w-5xl mx-auto px-6">
                 <div className="text-center mb-14 reveal">
-                  <span className="text-gold-500 font-serif italic text-xl">Kind Words</span>
-                  <h2 className="text-4xl md:text-5xl font-serif text-white mt-2 mb-4">Guest Reviews</h2>
-                  <div className="w-24 h-1 bg-gold-500 mx-auto"></div>
+                  <p className="text-gold-500 text-[10px] tracking-[0.5em] uppercase mb-3 font-medium">Kind Words</p>
+                  <h2 className="text-3xl font-serif text-gray-900 font-bold tracking-wide">Guest Reviews</h2>
+                  <div className="w-10 h-px bg-gold-500/50 mx-auto mt-4"></div>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                   {[
-                    { name: 'Sarah M.', role: 'Food Blogger', text: 'The Goat Brochettes were absolutely divine — perfectly charred outside, tender inside. This place is a hidden gem in Kigali.', avatar: 'https://randomuser.me/api/portraits/women/44.jpg', stars: 5 },
-                    { name: 'James K.', role: 'Regular Guest', text: 'Cafe Acacia never disappoints. The ambiance is elegant, the service impeccable, and the Lake Kivu Sambaza is unlike anything else.', avatar: 'https://randomuser.me/api/portraits/men/46.jpg', stars: 5 },
-                    { name: 'Amina R.', role: 'Travel Writer', text: 'Visited during my Rwanda trip and was blown away. Authentic flavors, beautiful presentation, and warm hospitality. A must-visit!', avatar: 'https://randomuser.me/api/portraits/women/68.jpg', stars: 5 },
+                    { name: 'Sarah M.', role: 'Coffee Lover', text: 'The espresso here is outstanding — smooth, rich and perfectly extracted. Best specialty coffee in Kigali!', avatar: 'https://randomuser.me/api/portraits/women/44.jpg', stars: 5 },
+                    { name: 'James K.', role: 'Regular Guest', text: 'Cafe Acacia never disappoints. The ambiance is elegant, the service impeccable, and the latte art is beautiful.', avatar: 'https://randomuser.me/api/portraits/men/46.jpg', stars: 5 },
+                    { name: 'Amina R.', role: 'Travel Writer', text: 'Visited during my Rwanda trip and was blown away. Authentic coffee, beautiful space, and warm hospitality. A must-visit!', avatar: 'https://randomuser.me/api/portraits/women/68.jpg', stars: 5 },
                   ].map((t, i) => (
-                    <div key={i} className={`testimonial-card reveal`} style={{transitionDelay:`${i*0.15}s`}}>
-                      <div className="flex gap-1 mb-4 mt-6">
+                    <div key={i} className="reveal p-8 border border-gray-100 hover:border-gold-500/30 transition-all bg-white" style={{transitionDelay:`${i*0.15}s`}}>
+                      <div className="flex gap-1 mb-4">
                         {[...Array(t.stars)].map((_, s) => <span key={s} className="text-gold-500 text-sm">★</span>)}
                       </div>
-                      <p className="text-gray-400 text-sm leading-relaxed mb-6 italic">"{t.text}"</p>
+                      <p className="text-gray-500 text-sm leading-relaxed mb-6 italic">"{t.text}"</p>
                       <div className="flex items-center gap-3">
                         <img src={t.avatar} alt={t.name} className="w-10 h-10 rounded-full border border-gold-500/30" />
                         <div>
-                          <p className="text-white font-serif text-sm">{t.name}</p>
+                          <p className="text-gray-900 font-serif text-sm">{t.name}</p>
                           <p className="text-gold-500 text-xs uppercase tracking-widest">{t.role}</p>
                         </div>
                       </div>
@@ -1030,104 +1009,42 @@
             </section>
 
             {/* Reservation Section */}
-            <section id="reservation" className="py-24 bg-dark-800 relative">
-              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-                <div className="flex flex-col lg:flex-row gap-16 items-center">
-                    
-                    <div className="lg:w-1/3 text-center lg:text-left">
-                        <p className="text-gold-500 font-serif italic text-xl mb-2">Online Reservation</p>
-                        <div className="w-24 h-1 bg-gold-500 mx-auto lg:mx-0 mb-6"></div>
-                        <h2 className="text-4xl md:text-5xl font-serif text-white mb-6">
-                            Book a Table
-                        </h2>
-                        <p className="text-gray-400 mb-8 leading-relaxed">
-                            Secure your spot at Cafe Acacia. Whether you are joining us for a quick lunch or a romantic dinner, we look forward to hosting you.
+            <section id="reservation" className="py-24 bg-white border-t border-gray-100">
+              <div className="max-w-5xl mx-auto px-6 md:px-10">
+                <div className="flex flex-col lg:flex-row gap-16 items-start">
+                    <div className="lg:w-2/5">
+                        <p className="text-gold-500 text-[10px] tracking-[0.5em] uppercase mb-3 font-medium">Online Reservation</p>
+                        <h2 className="text-3xl md:text-4xl font-serif text-gray-900 font-bold tracking-wide mb-4">Book an Experience</h2>
+                        <div className="w-10 h-px bg-gold-500/50 mb-6"></div>
+                        <p className="text-gray-500 leading-relaxed text-sm">
+                            Secure your spot at Cafe Acacia. We look forward to welcoming you.
                         </p>
+                        <div className="mt-8 space-y-3 text-gray-600 text-sm">
+                          <p>Mon – Fri: 07:00 – 22:00</p>
+                          <p>Sat – Sun: 08:00 – 23:00</p>
+                        </div>
                     </div>
 
-                    <div className="lg:w-2/3 bg-dark-900/80 backdrop-blur-sm p-8 md:p-12 rounded-sm shadow-2xl border border-white/5 w-full">
-                        <form onSubmit={handleInlineReservation} className="space-y-6">
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                                <div className="relative group">
-                                    <div className="absolute top-3 left-0 text-gold-500">
-                                        <User size={18} />
-                                    </div>
-                                    <input 
-                                        type="text"
-                                        name="name" 
-                                        placeholder="Your Name" 
-                                        required
-                                        className="w-full bg-transparent text-white pl-8 pr-4 py-3 border-b border-gray-700 focus:border-gold-500 focus:outline-none transition-colors placeholder-gray-500" 
-                                    />
-                                </div>
-                                <div className="relative group">
-                                    <div className="absolute top-3 left-0 text-gold-500 font-bold text-sm">
-                                        <Phone size={18} />
-                                    </div>
-                                    <input 
-                                        type="tel"
-                                        name="phone" 
-                                        placeholder="Phone Number" 
-                                        required
-                                        className="w-full bg-transparent text-white pl-8 pr-4 py-3 border-b border-gray-700 focus:border-gold-500 focus:outline-none transition-colors placeholder-gray-500" 
-                                    />
-                                </div>
+                    <div className="lg:w-3/5 bg-white p-8 md:p-10 shadow-sm border border-gray-100 rounded-sm w-full">
+                        <form onSubmit={handleInlineReservation} className="space-y-5">
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <input type="text" name="name" placeholder="Your Name" required
+                                    className="w-full bg-white border border-gray-200 text-gray-900 px-4 py-3 focus:border-gold-500 focus:outline-none rounded-sm text-sm placeholder-gray-400" />
+                                <input type="tel" name="phone" placeholder="Phone Number" required
+                                    className="w-full bg-white border border-gray-200 text-gray-900 px-4 py-3 focus:border-gold-500 focus:outline-none rounded-sm text-sm placeholder-gray-400" />
                             </div>
-
-                            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                                <div className="relative group">
-                                    <div className="absolute top-3 left-0 text-gold-500 pointer-events-none">
-                                        <User size={18} />
-                                    </div>
-                                     <select 
-                                        name="persons" 
-                                        className="w-full bg-transparent text-white pl-8 pr-4 py-3 border-b border-gray-700 focus:border-gold-500 focus:outline-none appearance-none cursor-pointer text-gray-400"
-                                    >
-                                        <option>1 Person</option>
-                                        <option>2 Persons</option>
-                                        <option>3 Persons</option>
-                                        <option>4 Persons</option>
-                                        <option>5+ Persons</option>
-                                    </select>
-                                    <ChevronDown size={14} className="absolute top-4 right-0 text-gray-600 pointer-events-none" />
-                                </div>
-                                <div className="relative group">
-                                    <div className="absolute top-3 left-0 text-gold-500 pointer-events-none">
-                                        <Calendar size={18} />
-                                    </div>
-                                    <input 
-                                        type="date"
-                                        name="date" 
-                                        required
-                                        className="w-full bg-transparent text-white pl-8 pr-4 py-3 border-b border-gray-700 focus:border-gold-500 focus:outline-none text-gray-400" 
-                                    />
-                                </div>
-                                <div className="relative group">
-                                    <div className="absolute top-3 left-0 text-gold-500 pointer-events-none">
-                                        <Clock size={18} />
-                                    </div>
-                                    <select name="time" className="w-full bg-transparent text-white pl-8 pr-4 py-3 border-b border-gray-700 focus:border-gold-500 focus:outline-none appearance-none cursor-pointer text-gray-400">
-                                        <option>08:00 AM</option>
-                                        <option>09:00 AM</option>
-                                        <option>10:00 AM</option>
-                                        <option>11:00 AM</option>
-                                        <option>12:00 PM</option>
-                                        <option>01:00 PM</option>
-                                        <option>05:00 PM</option>
-                                        <option>06:00 PM</option>
-                                        <option>07:00 PM</option>
-                                        <option>08:00 PM</option>
-                                        <option>09:00 PM</option>
-                                    </select>
-                                    <ChevronDown size={14} className="absolute top-4 right-0 text-gray-600 pointer-events-none" />
-                                </div>
+                            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                <select name="persons" className="w-full bg-white border border-gray-200 text-gray-600 px-4 py-3 focus:border-gold-500 focus:outline-none rounded-sm text-sm appearance-none">
+                                    <option>1 Person</option><option>2 Persons</option><option>3 Persons</option>
+                                    <option>4 Persons</option><option>5+ Persons</option>
+                                </select>
+                                <input type="date" name="date" required className="w-full bg-white border border-gray-200 text-gray-600 px-4 py-3 focus:border-gold-500 focus:outline-none rounded-sm text-sm" />
+                                <select name="time" className="w-full bg-white border border-gray-200 text-gray-600 px-4 py-3 focus:border-gold-500 focus:outline-none rounded-sm text-sm appearance-none">
+                                    {["08:00 AM","09:00 AM","10:00 AM","11:00 AM","12:00 PM","01:00 PM","05:00 PM","06:00 PM","07:00 PM","08:00 PM","09:00 PM"].map(t => <option key={t}>{t}</option>)}
+                                </select>
                             </div>
-
-                            <button
-                                type="submit"
-                                disabled={isInlineSubmitting}
-                                className="w-full py-4 btn-gold text-sm tracking-widest disabled:opacity-70 disabled:cursor-not-allowed flex justify-center items-center gap-2"
-                            >
+                            <button type="submit" disabled={isInlineSubmitting}
+                                className="w-full py-4 bg-gray-900 text-white font-semibold uppercase tracking-widest text-xs hover:bg-gold-500 transition-all duration-300 disabled:opacity-60 rounded-sm flex justify-center items-center gap-2">
                                 {isInlineSubmitting ? <><Loader2 className="animate-spin" size={20} /> Processing...</> : 'Confirm Booking'}
                             </button>
                         </form>
@@ -1137,12 +1054,17 @@
             </section>
 
             {/* Footer Section */}
-            <footer id="contact" className="bg-dark-900 pt-20 pb-10 border-t border-white/10">
+            <footer id="contact" className="pt-20 pb-10 border-t border-white/10" style={{backgroundColor:'#1c2236'}}>
               <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
                   {/* Brand */}
                   <div>
-                    <span className="font-serif text-2xl text-gold-500 font-bold tracking-wider block mb-6">CAFE ACACIA</span>
+                    <div className="flex items-center gap-3 mb-6">
+                      <div className="w-9 h-9 border border-white/50 flex items-center justify-center">
+                        <span className="text-xs font-bold tracking-widest text-white">CA</span>
+                      </div>
+                      <span className="text-sm font-medium tracking-[0.15em] text-white/80">cafe acacia</span>
+                    </div>
                     <p className="text-gray-400 mb-6 leading-relaxed">
                       Restaurant authentic and tasty food, taste perception to last a lifetime. We create delicious memories.
                     </p>
