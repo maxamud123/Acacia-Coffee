@@ -560,35 +560,7 @@
 
         // No backend needed - using localStorage
 
-        // Mount Stripe card element when card payment is selected
-        React.useEffect(() => {
-          if (paymentMethod === 'card' && isCartOpen) {
-            setTimeout(() => {
-              const el = document.getElementById('stripe-card-element');
-              if (el && !stripeCardMounted.current) {
-                const stripe = getStripe();
-                if (!stripe) return;
-                const elements = stripe.elements();
-                _cardElement = elements.create('card', {
-                  style: {
-                    base: { color: '#fff', fontSize: '14px', fontFamily: 'inherit', '::placeholder': { color: '#6b7280' } },
-                    invalid: { color: '#ef4444' },
-                  },
-                });
-                _cardElement.mount('#stripe-card-element');
-                _cardElement.on('change', e => setStripeError(e.error ? e.error.message : ''));
-                stripeCardMounted.current = true;
-              }
-            }, 150);
-          } else {
-            if (_cardElement && stripeCardMounted.current) {
-              _cardElement.unmount();
-              _cardElement = null;
-              stripeCardMounted.current = false;
-              setStripeError('');
-            }
-          }
-        }, [paymentMethod, isCartOpen]);
+        // No Stripe — payments handled locally
 
         // Scroll reveal
         React.useEffect(() => {
@@ -701,23 +673,8 @@
         const handleAuthSubmit = async (e) => {
           e.preventDefault();
           setAuthLoading(true);
-          const fd = new FormData(e.target);
           try {
-            let result;
-            if (authTab === 'login') {
-              result = await Backend.login(fd.get('email'), fd.get('password'));
-            } else {
-              result = await Backend.register(fd.get('name'), fd.get('email'), fd.get('password'), fd.get('phone'));
-            }
-            const { token, data } = result;
-            localStorage.setItem('cafe_token', token);
-            localStorage.setItem('cafe_user', JSON.stringify(data));
-            setAuthToken(token);
-            setAuthUser(data);
-            setIsAuthOpen(false);
-            showToast(`Welcome, ${data.name}!`, 'success');
-          } catch (err) {
-            showToast(err.message || 'Authentication failed', 'error');
+            showToast('Login not available in demo mode.', 'info');
           } finally {
             setAuthLoading(false);
           }
@@ -736,8 +693,8 @@
           setAdminLoading(true);
           try {
             const [bookings, orders] = await Promise.all([
-              Backend.getReservations(authToken),
-              Backend.getOrders(authToken),
+              Backend.getReservations(),
+              Backend.getOrders(),
             ]);
             setAdminBookings(bookings || []);
             setAdminOrders(orders || []);
