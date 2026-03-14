@@ -1,20 +1,39 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+# Acacia Coffee ☕
 
-# Run and deploy your AI Studio app
+A modern, responsive web application built with React and TypeScript. Designed with a clean UI and optimized for performance using Vite as the build tool.
 
-This contains everything you need to run your app locally.
+## Tech Stack
 
-View your app in AI Studio: https://ai.studio/apps/drive/1MC0b9eTcyx7EiCNDZExEYfPhDaHsVXDT
+- **React** — component-based UI
+- **TypeScript** — type-safe development
+- **Vite** — fast build tooling and dev server
+- **HTML / CSS** — custom styling
 
-## Run Locally
+## Features
 
-**Prerequisites:**  Node.js
+- Fast and responsive user interface
+- Type-safe codebase with TypeScript
+- Optimized build with Vite
+- Clean, modern design
 
+## Getting Started
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+### Prerequisites
+
+- [Node.js](https://nodejs.org/) v18+
+- npm
+
+### Installation
+
+```bash
+# Clone the repository
+git clone https://github.com/maxamud123/Acacia-Coffee.git
+
+# Navigate into the project
+cd Acacia-Coffee
+
+# Install dependencies
+npm install
+
+# Start the development server
+npm run dev
