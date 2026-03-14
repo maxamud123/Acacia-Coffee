@@ -393,233 +393,115 @@
       import { Utensils, Clock, MapPin, Phone, ChevronRight, Calendar, User, ChevronDown, Facebook, Twitter, Instagram, Youtube, Mail, ArrowUp, X, Menu, ShoppingBag, Plus, Minus, Trash2, Loader2, LogIn, LogOut, Shield, CreditCard, Smartphone, LayoutDashboard, CheckCircle, XCircle, RefreshCw } from 'lucide-react';
 
       const MENU_ITEMS = [
-        {
-          id: '1',
-          name: 'African Tea & Chapati',
-          description: 'Spiced milk tea with ginger, served with two fresh handmade chapatis.',
-          price: '$8.00',
-          image: 'https://images.unsplash.com/photo-1571934811356-5cc061b6821f?w=400&h=300&fit=crop&q=80',
-          category: 'breakfast',
-        },
-        {
-          id: '7',
-          name: 'Spanish Omelette',
-          description: 'Three farm-fresh eggs with potatoes, onions, and bell peppers, served with toast.',
-          price: '$9.00',
-          image: 'https://images.unsplash.com/photo-1510693206972-df098062cb71?w=400&h=300&fit=crop&q=80',
-          category: 'breakfast',
-        },
-        {
-          id: '8',
-          name: 'Tropical Fruit Platter',
-          description: 'Seasonal selection of sweet mango, papaya, pineapple, passion fruit, and watermelon.',
-          price: '$7.00',
-          image: 'https://images.unsplash.com/photo-1490474418585-ba9bad8fd0ea?w=400&h=300&fit=crop&q=80',
-          category: 'breakfast',
-        },
-        {
-          id: '2',
-          name: 'Agatogo with Beef',
-          description: 'Plantains stewed with tender beef cubes, tomatoes, and traditional spices.',
-          price: '$15.00',
-          image: 'https://images.unsplash.com/photo-1547592166-23ac45744acd?w=400&h=300&fit=crop&q=80',
-          category: 'lunch',
-        },
-        {
-          id: '3',
-          name: 'Isombe with Funge',
-          description: 'Mashed cassava leaves with spinach, eggplant, and peanut sauce.',
-          price: '$12.00',
-          image: 'https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=400&h=300&fit=crop&q=80',
-          category: 'lunch',
-        },
-        {
-          id: '9',
-          name: 'Whole Grilled Tilapia',
-          description: 'Fresh giant Tilapia from Lake Kivu, marinated and grilled, served with fried plantains.',
-          price: '$22.00',
-          image: 'https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=400&h=300&fit=crop&q=80',
-          category: 'lunch',
-        },
-        {
-          id: '10',
-          name: 'Coconut Chicken Curry',
-          description: 'Tender chicken breast simmered in fresh coconut milk, turmeric, and coriander.',
-          price: '$16.00',
-          image: 'https://images.unsplash.com/photo-1631452180519-c014fe946bc7?w=400&h=300&fit=crop&q=80',
-          category: 'lunch',
-        },
-        {
-          id: '4',
-          name: 'Goat Brochettes',
-          description: 'Charcoal-grilled goat meat skewers marinated in local herbs, served with fries.',
-          price: '$18.00',
-          image: 'https://images.unsplash.com/photo-1529042410759-befb1204b468?w=400&h=300&fit=crop&q=80',
-          category: 'dinner',
-        },
-        {
-          id: '5',
-          name: 'Lake Kivu Sambaza',
-          description: 'Crispy fried small fish from Lake Kivu, served with lemon and pili-pili sauce.',
-          price: '$16.00',
-          image: 'https://images.unsplash.com/photo-1580476262798-bddd9f4b7369?w=400&h=300&fit=crop&q=80',
-          category: 'dinner',
-        },
-        {
-          id: '6',
-          name: 'Akabenz Ribs',
-          description: 'Slow-roasted marinated pork ribs, glazed with a sweet and tangy bbq sauce.',
-          price: '$20.00',
-          image: 'https://images.unsplash.com/photo-1558030006-450675393462?w=400&h=300&fit=crop&q=80',
-          category: 'dinner',
-        },
-        {
-          id: '11',
-          name: 'Pepper Steak',
-          description: 'Premium beef tenderloin grilled to your liking with cracked peppercorn sauce.',
-          price: '$24.00',
-          image: 'https://images.unsplash.com/photo-1558030006-450675393462?w=400&h=300&fit=crop&q=80',
-          category: 'dinner',
-        },
-        {
-          id: '12',
-          name: 'Rwandan Specialty Coffee',
-          description: 'Premium single-origin Bourbon Arabica coffee, freshly brewed (Black or with Milk).',
-          price: '$4.00',
-          image: 'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=400&h=300&fit=crop&q=80',
-          category: 'drinks',
-        },
-        {
-          id: '13',
-          name: 'Fresh Passion Juice',
-          description: 'Freshly squeezed passion fruit juice, sweet and tangy.',
-          price: '$5.00',
-          image: 'https://images.unsplash.com/photo-1621506289937-a8e4df240d0b?w=400&h=300&fit=crop&q=80',
-          category: 'drinks',
-        },
-        {
-          id: '14',
-          name: 'Ikivuguto',
-          description: 'Traditional fermented milk, rich, creamy and naturally refreshing.',
-          price: '$3.00',
-          image: 'https://images.unsplash.com/photo-1488477181946-6428a0291777?w=400&h=300&fit=crop&q=80',
-          category: 'drinks',
-        },
-        {
-          id: '15',
-          name: 'Virunga Mist Cocktail',
-          description: 'Gin infused with local herbs, tonic, lime, and a hint of honey.',
-          price: '$10.00',
-          image: 'https://images.unsplash.com/photo-1551538827-9c037cb4f32a?w=400&h=300&fit=crop&q=80',
-          category: 'drinks',
-        },
+        // Hot Drinks
+        { id: 'h1',  name: 'Espresso',               price: '3,500', category: 'hot-drinks',   image: 'https://images.unsplash.com/photo-1510591509098-f4fdc6d0ff04?w=200&h=200&fit=crop' },
+        { id: 'h2',  name: 'Espresso Macchiato',      price: '4,000', category: 'hot-drinks',   image: 'https://images.unsplash.com/photo-1485808191679-5f86510bd9d4?w=200&h=200&fit=crop' },
+        { id: 'h3',  name: 'Americano',               price: '4,500', category: 'hot-drinks',   image: 'https://images.unsplash.com/photo-1551030173-122aabc4489c?w=200&h=200&fit=crop' },
+        { id: 'h4',  name: 'Pour Over (Chemex/V60)',  price: '5,000', category: 'hot-drinks',   image: 'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=200&h=200&fit=crop' },
+        { id: 'h5',  name: 'Aeropress',               price: '5,000', category: 'hot-drinks',   image: 'https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=200&h=200&fit=crop' },
+        { id: 'h6',  name: 'French Press',            price: '5,000', category: 'hot-drinks',   image: 'https://images.unsplash.com/photo-1512568400610-62da28bc8a13?w=200&h=200&fit=crop' },
+        { id: 'h7',  name: 'African Espresso',        price: '6,000', category: 'hot-drinks',   image: 'https://images.unsplash.com/photo-1511920170033-f8396924c348?w=200&h=200&fit=crop' },
+        { id: 'h8',  name: 'Cortado',                 price: '4,500', category: 'hot-drinks',   image: 'https://images.unsplash.com/photo-1485808191679-5f86510bd9d4?w=200&h=200&fit=crop' },
+        { id: 'h9',  name: 'Cappuccino',              price: '5,000', category: 'hot-drinks',   image: 'https://images.unsplash.com/photo-1572442388796-11668a67e53d?w=200&h=200&fit=crop' },
+        { id: 'h10', name: 'Flat White',              price: '5,000', category: 'hot-drinks',   image: 'https://images.unsplash.com/photo-1534040385115-33dcb3acba5b?w=200&h=200&fit=crop' },
+        { id: 'h11', name: 'Latte',                   price: '5,500', category: 'hot-drinks',   image: 'https://images.unsplash.com/photo-1561882468-9110e03e0f78?w=200&h=200&fit=crop' },
+        { id: 'h12', name: 'Spanish Latte',           price: '6,500', category: 'hot-drinks',   image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=200&h=200&fit=crop' },
+        { id: 'h13', name: 'African Latte',           price: '8,000', category: 'hot-drinks',   image: 'https://images.unsplash.com/photo-1541167760496-1628856ab772?w=200&h=200&fit=crop' },
+        { id: 'h14', name: 'Caramel Macchiato',       price: '8,500', category: 'hot-drinks',   image: 'https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=200&h=200&fit=crop' },
+        { id: 'h15', name: 'Vanilla Latte',           price: '7,500', category: 'hot-drinks',   image: 'https://images.unsplash.com/photo-1561882468-9110e03e0f78?w=200&h=200&fit=crop' },
+        { id: 'h16', name: 'Mocha',                   price: '9,000', category: 'hot-drinks',   image: 'https://images.unsplash.com/photo-1578374173713-74d6c2c1b41e?w=200&h=200&fit=crop' },
+        { id: 'h17', name: 'Nutmeg Latte',            price: '5,000', category: 'hot-drinks',   image: 'https://images.unsplash.com/photo-1485808191679-5f86510bd9d4?w=200&h=200&fit=crop' },
+        { id: 'h18', name: 'Tiramisu Latte',          price: '10,500', category: 'hot-drinks',  image: 'https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=200&h=200&fit=crop' },
+        { id: 'h19', name: 'Spicy Turmeric Latte',    price: '7,500', category: 'hot-drinks',   image: 'https://images.unsplash.com/photo-1534040385115-33dcb3acba5b?w=200&h=200&fit=crop' },
+        { id: 'h20', name: 'White Mocha',             price: '10,000', category: 'hot-drinks',  image: 'https://images.unsplash.com/photo-1578374173713-74d6c2c1b41e?w=200&h=200&fit=crop' },
+        { id: 'h21', name: 'Extra Espresso Shot',     price: '2,000', category: 'hot-drinks',   image: 'https://images.unsplash.com/photo-1510591509098-f4fdc6d0ff04?w=200&h=200&fit=crop' },
+        // Iced Drinks
+        { id: 'i1',  name: 'Iced Pour Over',          price: '6,000',  category: 'iced-drinks', image: 'https://images.unsplash.com/photo-1517701550927-30cf4ba1dba5?w=200&h=200&fit=crop' },
+        { id: 'i2',  name: 'Espresso Shakerato',      price: '4,500',  category: 'iced-drinks', image: 'https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=200&h=200&fit=crop' },
+        { id: 'i3',  name: 'Iced Espresso',           price: '3,500',  category: 'iced-drinks', image: 'https://images.unsplash.com/photo-1510591509098-f4fdc6d0ff04?w=200&h=200&fit=crop' },
+        { id: 'i4',  name: 'Cold Brew',               price: '6,000',  category: 'iced-drinks', image: 'https://images.unsplash.com/photo-1517701550927-30cf4ba1dba5?w=200&h=200&fit=crop' },
+        { id: 'i5',  name: 'Iced Americano',          price: '5,500',  category: 'iced-drinks', image: 'https://images.unsplash.com/photo-1551030173-122aabc4489c?w=200&h=200&fit=crop' },
+        { id: 'i6',  name: 'Cherry Cold Brew',        price: '7,500',  category: 'iced-drinks', image: 'https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=200&h=200&fit=crop' },
+        { id: 'i7',  name: 'Raspberry Cold Brew',     price: '9,000',  category: 'iced-drinks', image: 'https://images.unsplash.com/photo-1517701550927-30cf4ba1dba5?w=200&h=200&fit=crop' },
+        { id: 'i8',  name: 'Iced Latte',              price: '6,000',  category: 'iced-drinks', image: 'https://images.unsplash.com/photo-1561882468-9110e03e0f78?w=200&h=200&fit=crop' },
+        { id: 'i9',  name: 'Iced Spanish Latte',      price: '7,000',  category: 'iced-drinks', image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=200&h=200&fit=crop' },
+        { id: 'i10', name: 'Iced Mocha',              price: '9,500',  category: 'iced-drinks', image: 'https://images.unsplash.com/photo-1578374173713-74d6c2c1b41e?w=200&h=200&fit=crop' },
+        { id: 'i11', name: 'Iced Caramel Macchiato',  price: '9,000',  category: 'iced-drinks', image: 'https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=200&h=200&fit=crop' },
+        { id: 'i12', name: 'Iced Tiramisu Latte',     price: '11,000', category: 'iced-drinks', image: 'https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=200&h=200&fit=crop' },
+        { id: 'i13', name: 'Iced Vanilla Latte',      price: '8,000',  category: 'iced-drinks', image: 'https://images.unsplash.com/photo-1561882468-9110e03e0f78?w=200&h=200&fit=crop' },
+        { id: 'i14', name: 'Iced Nutmeg Latte',       price: '5,500',  category: 'iced-drinks', image: 'https://images.unsplash.com/photo-1485808191679-5f86510bd9d4?w=200&h=200&fit=crop' },
+        { id: 'i15', name: 'Plum Noir',               price: '9,000',  category: 'iced-drinks', image: 'https://images.unsplash.com/photo-1517701550927-30cf4ba1dba5?w=200&h=200&fit=crop' },
+        { id: 'i16', name: 'Iced White Mocha',        price: '10,500', category: 'iced-drinks', image: 'https://images.unsplash.com/photo-1578374173713-74d6c2c1b41e?w=200&h=200&fit=crop' },
+        { id: 'i17', name: 'Iced African Espresso',   price: '6,500',  category: 'iced-drinks', image: 'https://images.unsplash.com/photo-1511920170033-f8396924c348?w=200&h=200&fit=crop' },
+        { id: 'i18', name: 'Mont Blanc',              price: '12,000', category: 'iced-drinks', image: 'https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=200&h=200&fit=crop' },
+        { id: 'i19', name: 'Coffee Protein Shake',    price: '12,000', category: 'iced-drinks', image: 'https://images.unsplash.com/photo-1517701550927-30cf4ba1dba5?w=200&h=200&fit=crop' },
+        { id: 'i20', name: 'Affogato',                price: '12,000', category: 'iced-drinks', image: 'https://images.unsplash.com/photo-1510591509098-f4fdc6d0ff04?w=200&h=200&fit=crop' },
+        // Tea & Other Drinks
+        { id: 't1',  name: 'Black Loose Leaf Tea',    price: '5,500',  category: 'tea-drinks',  image: 'https://images.unsplash.com/photo-1556679343-c7306c1976bc?w=200&h=200&fit=crop' },
+        { id: 't2',  name: 'Babycinno',               price: '5,000',  category: 'tea-drinks',  image: 'https://images.unsplash.com/photo-1572442388796-11668a67e53d?w=200&h=200&fit=crop' },
+        { id: 't3',  name: 'Chai Latte',              price: '6,000',  category: 'tea-drinks',  image: 'https://images.unsplash.com/photo-1561882468-9110e03e0f78?w=200&h=200&fit=crop' },
+        { id: 't4',  name: 'Hot Chocolate',           price: '9,000',  category: 'tea-drinks',  image: 'https://images.unsplash.com/photo-1578374173713-74d6c2c1b41e?w=200&h=200&fit=crop' },
+        { id: 't5',  name: 'African Tea',             price: '6,500',  category: 'tea-drinks',  image: 'https://images.unsplash.com/photo-1556679343-c7306c1976bc?w=200&h=200&fit=crop' },
+        { id: 't6',  name: 'Green Loose Leaf Tea',    price: '5,500',  category: 'tea-drinks',  image: 'https://images.unsplash.com/photo-1556679343-c7306c1976bc?w=200&h=200&fit=crop' },
+        { id: 't7',  name: 'Spice Tea',               price: '6,000',  category: 'tea-drinks',  image: 'https://images.unsplash.com/photo-1556679343-c7306c1976bc?w=200&h=200&fit=crop' },
+        { id: 't8',  name: 'Iced Cascara Spritz',     price: '6,500',  category: 'tea-drinks',  image: 'https://images.unsplash.com/photo-1517701550927-30cf4ba1dba5?w=200&h=200&fit=crop' },
+        { id: 't9',  name: 'Iced Lemonade Tea',       price: '7,500',  category: 'tea-drinks',  image: 'https://images.unsplash.com/photo-1556679343-c7306c1976bc?w=200&h=200&fit=crop' },
+        { id: 't10', name: 'Iced Chocolate',          price: '9,500',  category: 'tea-drinks',  image: 'https://images.unsplash.com/photo-1578374173713-74d6c2c1b41e?w=200&h=200&fit=crop' },
+        { id: 't11', name: 'Iced Chai Latte',         price: '6,500',  category: 'tea-drinks',  image: 'https://images.unsplash.com/photo-1561882468-9110e03e0f78?w=200&h=200&fit=crop' },
+        { id: 't12', name: 'Hibiscus Spritz',         price: '9,000',  category: 'tea-drinks',  image: 'https://images.unsplash.com/photo-1556679343-c7306c1976bc?w=200&h=200&fit=crop' },
+        { id: 't13', name: 'Cascara Tea',             price: '5,000',  category: 'tea-drinks',  image: 'https://images.unsplash.com/photo-1556679343-c7306c1976bc?w=200&h=200&fit=crop' },
+        { id: 't14', name: 'Matcha Raspberry',        price: '12,000', category: 'tea-drinks',  image: 'https://images.unsplash.com/photo-1556679343-c7306c1976bc?w=200&h=200&fit=crop' },
+        { id: 't15', name: 'Ginger Soda',             price: '5,500',  category: 'tea-drinks',  image: 'https://images.unsplash.com/photo-1556679343-c7306c1976bc?w=200&h=200&fit=crop' },
+        { id: 't16', name: 'Ginger Shot',             price: '3,000',  category: 'tea-drinks',  image: 'https://images.unsplash.com/photo-1556679343-c7306c1976bc?w=200&h=200&fit=crop' },
+        { id: 't17', name: 'Raspberry Lemonade',      price: '12,000', category: 'tea-drinks',  image: 'https://images.unsplash.com/photo-1556679343-c7306c1976bc?w=200&h=200&fit=crop' },
+        { id: 't18', name: 'Iced Matcha Tea',         price: '9,500',  category: 'tea-drinks',  image: 'https://images.unsplash.com/photo-1517701550927-30cf4ba1dba5?w=200&h=200&fit=crop' },
+        { id: 't19', name: 'Matcha Mango',            price: '12,000', category: 'tea-drinks',  image: 'https://images.unsplash.com/photo-1556679343-c7306c1976bc?w=200&h=200&fit=crop' },
+        { id: 't20', name: 'Matcha Tea',              price: '9,000',  category: 'tea-drinks',  image: 'https://images.unsplash.com/photo-1556679343-c7306c1976bc?w=200&h=200&fit=crop' },
+        // Soft Drinks
+        { id: 's1', name: 'Water',                    price: '2,500',  category: 'soft-drinks', image: 'https://images.unsplash.com/photo-1548839140-29a749e1cf4d?w=200&h=200&fit=crop' },
+        { id: 's2', name: 'Mixed Fruit Juice',        price: '10,000', category: 'soft-drinks', image: 'https://images.unsplash.com/photo-1600271886742-f049cd451bba?w=200&h=200&fit=crop' },
+        { id: 's3', name: 'Glass Bottle Water',       price: '2,500',  category: 'soft-drinks', image: 'https://images.unsplash.com/photo-1548839140-29a749e1cf4d?w=200&h=200&fit=crop' },
+        { id: 's4', name: 'Pineapple Juice',          price: '10,000', category: 'soft-drinks', image: 'https://images.unsplash.com/photo-1600271886742-f049cd451bba?w=200&h=200&fit=crop' },
+        { id: 's5', name: 'Orange Juice',             price: '12,000', category: 'soft-drinks', image: 'https://images.unsplash.com/photo-1600271886742-f049cd451bba?w=200&h=200&fit=crop' },
+        { id: 's6', name: 'Green Juice',              price: '11,000', category: 'soft-drinks', image: 'https://images.unsplash.com/photo-1600271886742-f049cd451bba?w=200&h=200&fit=crop' },
+        { id: 's7', name: 'Smoothie',                 price: '10,000', category: 'soft-drinks', image: 'https://images.unsplash.com/photo-1600271886742-f049cd451bba?w=200&h=200&fit=crop' },
+        // Extras
+        { id: 'e1', name: 'Low Fat Milk',             price: '500',   category: 'extras', image: 'https://images.unsplash.com/photo-1509440159596-0249088772ff?w=200&h=200&fit=crop' },
+        { id: 'e2', name: 'Vanilla Flavor',           price: '1,500', category: 'extras', image: 'https://images.unsplash.com/photo-1509440159596-0249088772ff?w=200&h=200&fit=crop' },
+        { id: 'e3', name: 'Caramel Flavor',           price: '1,500', category: 'extras', image: 'https://images.unsplash.com/photo-1509440159596-0249088772ff?w=200&h=200&fit=crop' },
+        { id: 'e4', name: 'Oat Milk',                 price: '1,500', category: 'extras', image: 'https://images.unsplash.com/photo-1509440159596-0249088772ff?w=200&h=200&fit=crop' },
+        { id: 'e5', name: 'Almond Milk',              price: '1,500', category: 'extras', image: 'https://images.unsplash.com/photo-1509440159596-0249088772ff?w=200&h=200&fit=crop' },
+        { id: 'e6', name: 'Spanish Flavor',           price: '1,500', category: 'extras', image: 'https://images.unsplash.com/photo-1509440159596-0249088772ff?w=200&h=200&fit=crop' },
+        { id: 'e7', name: 'Soy Milk',                 price: '1,500', category: 'extras', image: 'https://images.unsplash.com/photo-1509440159596-0249088772ff?w=200&h=200&fit=crop' },
       ];
 
-      // Backend API Service — auto-switches between local and production
-      const API_URL = (window.location.hostname === 'localhost' || window.location.protocol === 'file:')
-        ? 'http://localhost:5000/api'
-        : 'https://acacia-coffee-production.up.railway.app/api';
-
-      const STRIPE_PK = 'pk_test_51T982N4vrHFGKUnMtuceqVS12jwMaG2aABYDzdcriclfBRB5vRIbwLeuoAw3BrqwQFMgKETk4tmXHKao2JBJcUII00jjRdKugp';
-      let _stripe = null;
-      let _cardElement = null;
-      const getStripe = () => {
-        if (!_stripe && window.Stripe) _stripe = window.Stripe(STRIPE_PK);
-        return _stripe;
-      };
-
+      // localStorage-based Backend — no server needed
       const Backend = {
         async createReservation(data) {
-          const res = await fetch(`${API_URL}/reservations`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(data),
-          });
-          if (!res.ok) throw new Error('Failed to create reservation');
-          const result = await res.json();
-          return { success: true, message: "Reservation confirmed!", data: result };
+          const reservations = JSON.parse(localStorage.getItem('ca_reservations') || '[]');
+          reservations.push({ ...data, _id: Date.now().toString(), status: 'pending', createdAt: new Date().toISOString() });
+          localStorage.setItem('ca_reservations', JSON.stringify(reservations));
+          return { success: true, message: "Reservation confirmed!" };
         },
-
         async placeOrder(order) {
-          const res = await fetch(`${API_URL}/orders`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(order),
-          });
-          if (!res.ok) throw new Error('Failed to place order');
-          const result = await res.json();
-          return { success: true, message: "Order received! Kitchen is preparing your meal.", data: result };
+          const orders = JSON.parse(localStorage.getItem('ca_orders') || '[]');
+          orders.push({ ...order, _id: Date.now().toString(), status: 'pending', createdAt: new Date().toISOString() });
+          localStorage.setItem('ca_orders', JSON.stringify(orders));
+          return { success: true, message: "Order received!" };
         },
-
-        async login(email, password) {
-          const res = await fetch(`${API_URL}/auth/login`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ email, password }),
-          });
-          const result = await res.json();
-          if (!res.ok) throw new Error(result.error || 'Login failed');
-          return result;
+        async getReservations() { return JSON.parse(localStorage.getItem('ca_reservations') || '[]'); },
+        async getOrders() { return JSON.parse(localStorage.getItem('ca_orders') || '[]'); },
+        async updateReservationStatus(id, status) {
+          const items = JSON.parse(localStorage.getItem('ca_reservations') || '[]');
+          const idx = items.findIndex(i => i._id === id);
+          if (idx !== -1) { items[idx].status = status; localStorage.setItem('ca_reservations', JSON.stringify(items)); }
+          return items[idx];
         },
-
-        async register(name, email, password, phone) {
-          const res = await fetch(`${API_URL}/auth/register`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ name, email, password, phone }),
-          });
-          const result = await res.json();
-          if (!res.ok) throw new Error(result.error || 'Registration failed');
-          return result;
-        },
-
-        async adminLogin(email, password) {
-          const res = await fetch(`${API_URL}/auth/admin-login`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ email, password }),
-          });
-          const result = await res.json();
-          if (!res.ok) throw new Error(result.error || 'Admin login failed');
-          return result;
-        },
-
-        async getReservations(token) {
-          const res = await fetch(`${API_URL}/reservations`, {
-            headers: { 'Authorization': `Bearer ${token}` },
-          });
-          const result = await res.json();
-          if (!res.ok) throw new Error(result.error || 'Failed to load reservations');
-          return result.data;
-        },
-
-        async getOrders(token) {
-          const res = await fetch(`${API_URL}/orders`, {
-            headers: { 'Authorization': `Bearer ${token}` },
-          });
-          const result = await res.json();
-          if (!res.ok) throw new Error(result.error || 'Failed to load orders');
-          return result.data;
-        },
-
-        async updateReservationStatus(id, status, token) {
-          const res = await fetch(`${API_URL}/reservations/${id}`, {
-            method: 'PATCH',
-            headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
-            body: JSON.stringify({ status }),
-          });
-          if (!res.ok) throw new Error('Failed to update status');
-          return (await res.json()).data;
-        },
-
-        async updateOrderStatus(id, status, token) {
-          const res = await fetch(`${API_URL}/orders/${id}`, {
-            method: 'PATCH',
-            headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
-            body: JSON.stringify({ status }),
-          });
-          if (!res.ok) throw new Error('Failed to update status');
-          return (await res.json()).data;
+        async updateOrderStatus(id, status) {
+          const items = JSON.parse(localStorage.getItem('ca_orders') || '[]');
+          const idx = items.findIndex(i => i._id === id);
+          if (idx !== -1) { items[idx].status = status; localStorage.setItem('ca_orders', JSON.stringify(items)); }
+          return items[idx];
         },
       };
 
@@ -630,11 +512,10 @@
       ];
 
       const NAV_LINKS = [
-        { name: 'Home', href: '#home' },
-        { name: 'Menu', href: '#menu' },
-        { name: 'About', href: '#about' },
-        { name: 'Reservations', href: '#reservation' },
-        { name: 'Contact', href: '#contact' }
+        { name: 'Cafe', href: '#menu' },
+        { name: 'Pastries', href: '#menu' },
+        { name: 'Food', href: '#menu' },
+        { name: 'Reserve Table', href: '#reservation' },
       ];
 
       const App = () => {
@@ -648,7 +529,7 @@
         const [isSubmitting, setIsSubmitting] = React.useState(false);
         const [isInlineSubmitting, setIsInlineSubmitting] = React.useState(false);
         const [toasts, setToasts] = React.useState([]);
-        const [activeCategory, setActiveCategory] = React.useState('all');
+        const [activeCategory, setActiveCategory] = React.useState('hot-drinks');
         const [apiStatus, setApiStatus] = React.useState('checking');
         const [paymentMethod, setPaymentMethod] = React.useState('cash');
         const [momoPhone, setMomoPhone] = React.useState('');
@@ -677,12 +558,7 @@
           setTimeout(() => setToasts(prev => prev.filter(t => t.id !== id)), 4500);
         };
 
-        // Check backend connection on load
-        React.useEffect(() => {
-          fetch(`${API_URL}/health`)
-            .then(r => r.ok ? setApiStatus('online') : setApiStatus('offline'))
-            .catch(() => setApiStatus('offline'));
-        }, []);
+        // No backend needed - using localStorage
 
         // Mount Stripe card element when card payment is selected
         React.useEffect(() => {
@@ -762,7 +638,7 @@
         };
 
         const cartTotal = cart.reduce((sum, item) => {
-            const price = parseFloat(item.price.replace('$', ''));
+            const price = parseFloat(item.price.replace(/,/g, ''));
             return sum + (price * item.quantity);
         }, 0);
 
@@ -806,44 +682,17 @@
         const handleCheckout = async () => {
             setIsSubmitting(true);
             try {
-              if (paymentMethod === 'card') {
-                // Stripe card payment
-                const res = await fetch(`${API_URL}/payment/create-intent`, {
-                  method: 'POST',
-                  headers: { 'Content-Type': 'application/json' },
-                  body: JSON.stringify({ amount: Math.round(cartTotal * 100), currency: 'usd' }),
-                });
-                const intentData = await res.json();
-                if (!intentData.clientSecret) throw new Error('Payment setup failed');
-
-                const stripe = getStripe();
-                const { error, paymentIntent } = await stripe.confirmCardPayment(intentData.clientSecret, {
-                  payment_method: { card: _cardElement },
-                });
-                if (error) { showToast(error.message, 'error'); setIsSubmitting(false); return; }
-
-                await Backend.placeOrder({
-                  items: cart, total: cartTotal,
-                  customerName: authUser?.name || 'Guest',
-                  customerEmail: authUser?.email,
-                  paymentMethod: 'card',
-                  paymentStatus: 'paid',
-                  paymentId: paymentIntent.id,
-                });
-              } else {
-                await Backend.placeOrder({
-                  items: cart, total: cartTotal,
-                  customerName: authUser?.name || 'Guest',
-                  customerEmail: authUser?.email,
-                  paymentMethod,
-                });
-              }
+              await Backend.placeOrder({
+                items: cart, total: cartTotal,
+                customerName: 'Guest',
+                paymentMethod,
+              });
               setCart([]);
               setIsCartOpen(false);
               setPaymentMethod('cash');
-              showToast('Order placed! Our kitchen is preparing your meal.', 'success');
+              showToast('Order placed! Thank you.', 'success');
             } catch (err) {
-              showToast(err.message || 'Could not place order. Please try again.', 'error');
+              showToast('Could not place order. Please try again.', 'error');
             } finally {
               setIsSubmitting(false);
             }
@@ -926,14 +775,22 @@
 
         return (
           <div className="min-h-screen flex flex-col">
-            {/* Navbar */}
-            <nav className={`fixed w-full z-50 transition-all duration-300 ${
-              scrolled ? 'bg-dark-900/95 backdrop-blur-md border-b border-white/10 py-0 shadow-lg' : 'bg-transparent py-4'
-            }`}>
+            {/* Navbar — always dark navy like Kivu Noir */}
+            <nav className="fixed w-full z-50" style={{backgroundColor:'#1c2236'}}>
+              <div className="flex justify-center pt-2">
+                <div className="w-2 h-2 rounded-full border border-white/30 flex items-center justify-center">
+                  <div className="w-1 h-1 rounded-full bg-white/50"></div>
+                </div>
+              </div>
               <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="flex items-center justify-between h-20">
+                <div className="flex items-center justify-between h-16">
                   <div className="flex-shrink-0">
-                    <span className="font-serif text-2xl text-gold-500 font-bold tracking-wider">CAFE ACACIA</span>
+                    <a href="#home" className="flex items-center gap-3 group">
+                      <div className="w-9 h-9 border border-white/50 flex items-center justify-center group-hover:border-gold-500 transition-colors">
+                        <span className="text-xs font-bold tracking-widest text-white group-hover:text-gold-500 transition-colors">CA</span>
+                      </div>
+                      <span className="text-sm font-medium tracking-[0.15em] text-white/70 group-hover:text-white transition-colors">cafe acacia</span>
+                    </a>
                   </div>
                   
                   {/* Desktop Menu */}
@@ -947,29 +804,11 @@
                     </div>
                   </div>
 
-                  {/* API Status + Auth + Admin */}
+                  {/* Reserve Space button */}
                   <div className="hidden md:flex items-center gap-3">
-                    <span className={`api-badge ${apiStatus === 'online' ? 'api-online' : 'api-offline'}`}>
-                      <span className={`api-dot ${apiStatus === 'online' ? 'api-dot-online' : 'api-dot-offline'}`}></span>
-                      {apiStatus === 'online' ? 'Server Online' : apiStatus === 'offline' ? 'Server Offline' : 'Connecting...'}
-                    </span>
-                    {authUser ? (
-                      <>
-                        {authUser.role === 'admin' && (
-                          <button onClick={openAdmin} className="flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest text-gold-500 border border-gold-500/40 px-3 py-1.5 hover:bg-gold-500 hover:text-dark-900 transition-all">
-                            <LayoutDashboard size={14} /> Admin
-                          </button>
-                        )}
-                        <span className="text-gray-400 text-xs">{authUser.name}</span>
-                        <button onClick={handleLogout} className="text-gray-500 hover:text-red-400 transition-colors" title="Logout">
-                          <LogOut size={16} />
-                        </button>
-                      </>
-                    ) : (
-                      <button onClick={() => { setAuthTab('login'); setIsAuthOpen(true); }} className="flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest text-gray-400 hover:text-gold-500 transition-colors">
-                        <LogIn size={14} /> Login
-                      </button>
-                    )}
+                    <a href="#reservation" className="px-5 py-2 text-[10px] font-semibold uppercase tracking-[0.25em] border border-white/30 text-white/80 hover:border-gold-500 hover:text-gold-500 transition-all duration-300">
+                      Reserve Space
+                    </a>
                   </div>
 
                   {/* Cart Button */}
@@ -1093,63 +932,79 @@
               <div className="section-divider mt-16"></div>
             </section>
 
-            {/* Menu Section */}
-            <section id="menu" className="py-24 bg-dark-900">
-              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="text-center mb-12 reveal">
-                  <span className="text-gold-500 font-serif italic text-xl">Discover</span>
-                  <h2 className="text-4xl md:text-5xl font-serif text-white mt-2 mb-4">Our Menu</h2>
-                  <div className="w-24 h-1 bg-gold-500 mx-auto mb-10"></div>
-
-                  {/* Category Filter Tabs */}
-                  <div className="flex flex-wrap justify-center gap-2">
-                    {['all', 'breakfast', 'lunch', 'dinner', 'drinks'].map(cat => (
-                      <button
-                        key={cat}
-                        onClick={() => setActiveCategory(cat)}
-                        className={`cat-tab ${activeCategory === cat ? 'active' : ''}`}
-                      >
-                        {cat === 'all' ? 'All Items' : cat}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
-                  {MENU_ITEMS.filter(item => activeCategory === 'all' || item.category === activeCategory).map((item, idx) => (
-                    <div key={item.id} className="menu-card reveal" style={{transitionDelay:`${(idx % 4) * 0.08}s`}}>
-                      <div className="relative overflow-hidden" style={{height:'200px'}}>
-                        <img src={item.image} alt={item.name} className="menu-card-img" style={{width:'100%',height:'100%',objectFit:'cover'}} />
-                        <div className="menu-card-overlay">
-                          <button
-                            onClick={() => { addToCart(item); showToast(`${item.name} added to your order`, 'info'); }}
-                            className="w-full py-2.5 btn-gold text-xs tracking-widest flex items-center justify-center gap-2"
-                          >
-                            <Plus size={14} /> Add to Order
-                          </button>
-                        </div>
-                        <span className="menu-card-badge">{item.category}</span>
-                      </div>
-                      <div className="p-4">
-                        <div className="flex justify-between items-start mb-2">
-                          <h3 className="font-serif text-white text-base leading-tight flex-1 pr-2 group-hover:text-gold-500 transition-colors">{item.name}</h3>
-                          <span className="text-gold-500 font-bold text-base shrink-0">{item.price}</span>
-                        </div>
-                        <p className="text-gray-500 text-xs leading-relaxed mb-4 line-clamp-2">{item.description}</p>
-                        <button
-                          onClick={() => { addToCart(item); showToast(`${item.name} added to your order`, 'info'); }}
-                          className="w-full py-2 btn-gold text-[10px] tracking-widest flex items-center justify-center gap-1.5"
-                        >
-                          <Plus size={12} /> Add to Order
-                        </button>
-                      </div>
-                    </div>
+            {/* Menu Section — Kivu Noir style */}
+            <section id="menu" className="bg-white">
+              {/* Category tabs */}
+              <div className="sticky z-40 bg-white border-b border-gray-200 shadow-sm" style={{top:'73px'}}>
+                <div className="max-w-4xl mx-auto px-4 flex items-center gap-2 overflow-x-auto">
+                  {[
+                    { key: 'hot-drinks',  label: 'Hot Drinks' },
+                    { key: 'iced-drinks', label: 'Iced Drinks' },
+                    { key: 'tea-drinks',  label: 'Tea & Other Drinks' },
+                    { key: 'soft-drinks', label: 'Soft Drinks' },
+                    { key: 'extras',      label: 'Extras' },
+                  ].map(cat => (
+                    <button
+                      key={cat.key}
+                      onClick={() => setActiveCategory(cat.key)}
+                      className={`py-4 px-2 text-sm font-medium tracking-wide whitespace-nowrap transition-all duration-200 border-b-2 -mb-px shrink-0 ${
+                        activeCategory === cat.key
+                          ? 'border-gray-900 text-gray-900'
+                          : 'border-transparent text-gray-500 hover:text-gray-800'
+                      }`}
+                    >
+                      {cat.label}
+                    </button>
                   ))}
                 </div>
+              </div>
 
-                {MENU_ITEMS.filter(item => activeCategory === 'all' || item.category === activeCategory).length === 0 && (
-                  <p className="text-center text-gray-500 py-16">No items in this category.</p>
-                )}
+              {/* Menu content — light gray background */}
+              <div style={{backgroundColor:'#f2f2f2'}} className="py-16">
+                <div className="max-w-4xl mx-auto px-6">
+                  {/* Section heading */}
+                  <div className="text-center mb-12">
+                    <h2 className="text-gray-900 text-lg font-serif mb-3 tracking-wider">
+                      {[
+                        { key: 'hot-drinks',  label: 'Hot Drinks' },
+                        { key: 'iced-drinks', label: 'Iced Drinks' },
+                        { key: 'tea-drinks',  label: 'Tea & Other Drinks' },
+                        { key: 'soft-drinks', label: 'Soft Drinks' },
+                        { key: 'extras',      label: 'Extras' },
+                      ].find(c => c.key === activeCategory)?.label}
+                    </h2>
+                    <div className="flex items-center justify-center gap-1">
+                      {[0,1,2,3,4,5,6].map(i => <div key={i} className="w-1 h-1 rounded-full bg-gray-400"></div>)}
+                    </div>
+                  </div>
+
+                  {/* 2-column list */}
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-0">
+                    {MENU_ITEMS.filter(item => item.category === activeCategory).map(item => (
+                      <div
+                        key={item.id}
+                        className="flex items-center gap-4 py-4 border-b border-gray-200 cursor-pointer hover:bg-white/60 -mx-3 px-3 transition-colors rounded group"
+                        onClick={() => { addToCart(item); showToast(`${item.name} added to cart`, 'info'); }}
+                      >
+                        <div className="w-14 h-14 shrink-0 rounded-lg overflow-hidden bg-gray-800">
+                          <img src={item.image} alt={item.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+                        </div>
+                        <div className="flex items-baseline flex-1 gap-0 min-w-0">
+                          <span className="text-gray-900 font-medium text-sm shrink-0">{item.name}</span>
+                          <span className="menu-leader-light"></span>
+                          <span className="text-gray-800 font-medium text-sm shrink-0">{item.price}</span>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+
+                  <div className="text-center mt-16 pt-10 border-t border-gray-200">
+                    <p className="text-gray-400 text-xs uppercase tracking-[0.3em] mb-6">Open daily · 07:00 AM – 10:00 PM</p>
+                    <a href="#reservation" className="inline-block px-10 py-3 border border-gray-800 text-gray-800 font-semibold uppercase text-[10px] tracking-[0.3em] hover:bg-gray-800 hover:text-white transition-all duration-300">
+                      Reserve a Table
+                    </a>
+                  </div>
+                </div>
               </div>
             </section>
 
