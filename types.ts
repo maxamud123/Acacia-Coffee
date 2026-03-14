@@ -4,7 +4,7 @@ export interface MenuItem {
   name: string;
   description: string;
   price: string;
-  category: 'breakfast' | 'lunch' | 'dinner' | 'drinks';
+  category: 'hot-drinks' | 'iced-drinks' | 'tea-drinks' | 'soft-drinks' | 'extras';
   image: string;
   seasonal?: boolean;
 }

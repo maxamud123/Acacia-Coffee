@@ -36,7 +36,13 @@ export const Navbar: React.FC = () => {
   return (
     <>
       {/* Always dark navy — Kivu Noir style */}
-      <header className="w-full z-50 fixed top-0 bg-navy-800 py-4">
+      <header className="w-full z-50 fixed top-0 bg-navy-800">
+        {/* Small dot at top center — Kivu Noir signature */}
+        <div className="flex justify-center pt-2 pb-0">
+          <div className="w-2 h-2 rounded-full border border-white/40 flex items-center justify-center">
+            <div className="w-1 h-1 rounded-full bg-white/60" />
+          </div>
+        </div>
         <div className="container mx-auto px-6 md:px-10 flex justify-between items-center">
 
           {/* Logo — "CA" box + name */}
@@ -74,6 +80,8 @@ export const Navbar: React.FC = () => {
           {/* Right — cart + reserve */}
           <div className="flex items-center gap-5">
             <button
+              type="button"
+              aria-label="Open cart"
               onClick={() => setCartOpen(true)}
               className="relative text-white/70 hover:text-gold-500 transition-colors p-1"
             >
@@ -94,6 +102,8 @@ export const Navbar: React.FC = () => {
             </a>
 
             <button
+              type="button"
+              aria-label="Toggle menu"
               className="lg:hidden text-white"
               onClick={() => setIsOpen(!isOpen)}
             >
@@ -105,6 +115,8 @@ export const Navbar: React.FC = () => {
         {/* Mobile Nav */}
         <div className={`fixed inset-0 bg-navy-800 z-40 lg:hidden flex flex-col items-center justify-center gap-8 transition-transform duration-300 ${isOpen ? 'translate-x-0' : 'translate-x-full'}`}>
           <button
+            type="button"
+            aria-label="Close menu"
             className="absolute top-6 right-6 text-white"
             onClick={() => setIsOpen(false)}
           >
