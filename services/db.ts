@@ -1,35 +1,47 @@
 import { Booking, BookingStatus } from '../types';
 
-const API_URL = 'http://localhost:5000/api';
+const STORAGE_KEY = 'cafe_acacia_bookings';
+
+function getBookings(): Booking[] {
+  try {
+    return JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+  } catch {
+    return [];
+  }
+}
+
+function saveBookings(bookings: Booking[]) {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(bookings));
+}
 
 export const db = {
   async getAll(): Promise<Booking[]> {
-    const res = await fetch(`${API_URL}/reservations`);
-    if (!res.ok) throw new Error('Failed to fetch reservations');
-    return res.json();
+    return getBookings();
   },
 
   async create(booking: Omit<Booking, '_id' | 'createdAt' | 'status'>): Promise<Booking> {
-    const res = await fetch(`${API_URL}/reservations`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(booking),
-    });
-    if (!res.ok) throw new Error('Failed to create reservation');
-    return res.json();
+    const bookings = getBookings();
+    const newBooking: Booking = {
+      ...booking,
+      _id: Date.now().toString(),
+      createdAt: new Date().toISOString(),
+      status: 'pending',
+    };
+    bookings.push(newBooking);
+    saveBookings(bookings);
+    return newBooking;
   },
 
   async updateStatus(id: string, status: BookingStatus): Promise<void> {
-    const res = await fetch(`${API_URL}/reservations/${id}`, {
-      method: 'PATCH',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ status }),
-    });
-    if (!res.ok) throw new Error('Failed to update reservation');
+    const bookings = getBookings();
+    const idx = bookings.findIndex(b => b._id === id);
+    if (idx !== -1) {
+      bookings[idx].status = status;
+      saveBookings(bookings);
+    }
   },
 
   async clear(): Promise<void> {
-    const res = await fetch(`${API_URL}/reservations`, { method: 'DELETE' });
-    if (!res.ok) throw new Error('Failed to clear reservations');
+    localStorage.removeItem(STORAGE_KEY);
   },
 };
